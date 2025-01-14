@@ -1,6 +1,5 @@
 package com.example.board.dto;
 
-import com.example.board.entity.User;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,7 +7,27 @@ import jakarta.validation.constraints.Size;
 
 public class UserDto {
 
-    public User getName() {
+    @NotEmpty(message = "Name is required")
+    private String name;
+
+    @NotEmpty(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
+    private String password;
+
+    @NotNull(message = "Age is required")
+    private Integer age;
+
+    @NotEmpty(message = "Sex is required")
+    @Pattern(regexp = "^(M|F)$", message = "Sex must be 'M' or 'F'")
+    private String sex;
+
+    @NotEmpty(message = "Phone number is required")
+    private String phoneNumber;
+
+    public UserDto() {}
+
+    // Getter & Setter
+    public String getName() {
         return name;
     }
 
@@ -40,32 +59,11 @@ public class UserDto {
         this.sex = sex;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    @NotEmpty(message = "Name is required")
-    private String name;
-
-    @NotEmpty(message = "Password is required")
-    @Size(min = 6 , message = "Password must be at laest 6 charactor long")
-    private String password;
-
-    @NotNull(message ="Age is required")
-    private Integer age;
-
-    @NotEmpty(message = "Sex is required")
-    @Pattern(regexp = "^(M|F)$",message = "Sex must be M or F")
-    private String sex;
-
-    @NotNull(message = "Phone number is required")
-    private Integer phoneNumber;
-
-    public UserDto() {}
-
-
 }
