@@ -29,7 +29,7 @@ public class  UserService {
           String encoded = passwordEncdoer.encode(userDto.getPassword());
 
           User user = new User();
-          user.setName(userDto.getName());
+          user.setEmail(userDto.getEmail());
           user.setPassword(encoded);
           user.setAge(userDto.getAge());
           user.setSex(userDto.getSex());

@@ -14,7 +14,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -31,12 +31,12 @@ public class User {
     @Lob
     private String content;
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String name) {
+        this.email = name;
     }
 
     public String getPassword() {

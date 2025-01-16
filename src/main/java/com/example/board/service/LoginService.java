@@ -23,7 +23,7 @@ public class LoginService {
     }
     public String login(LoginRequestDto loginRequestDto){
         //유저 조회
-        Optional<User> optionalUser =userRepository.findByName(loginRequestDto.getName());
+        Optional<User> optionalUser =userRepository.findByEmail(loginRequestDto.getEmail());
         if(optionalUser.isPresent()){
             User user = optionalUser.get();
 

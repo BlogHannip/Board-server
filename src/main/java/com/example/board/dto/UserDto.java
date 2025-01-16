@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class UserDto {
 
     @NotEmpty(message = "Name is required")
-    private String name;
+    private String email;
 
     @NotEmpty(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters long")
@@ -27,12 +27,12 @@ public class UserDto {
     public UserDto() {}
 
     // Getter & Setter
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String name) {
+        this.email = email;
     }
 
     public String getPassword() {
