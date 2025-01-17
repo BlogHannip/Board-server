@@ -26,9 +26,11 @@ function MDBSelect(props: { // 메소드가 안떠서 직접만듬
 
 const RegisterForm = () => {
     const [email,setEmail] =useState('');
+    const [firstName, setFirstName] =useState('');
+    const [lastName , setLastName] =useState('');
+    const [birthday ,setBirthDay] = useState('');
     const [password,setPassword] =useState('');
     const [confirmPassword, setConfirmPassword] =useState('');
-    const [age,setAge] =useState('');
     const [sex,setSex] =useState('');
     const [phoneNumber , setPhoneNumber] =useState('');
     const [errorMessage , setErrorMessage] = useState('');
@@ -45,12 +47,14 @@ const RegisterForm = () => {
             const response = await apiClient.post('/register',{
                 email,
                 password,
-                age,
                 sex,
                 phoneNumber,
+                birthday,
+                firstName,
+                lastName
             });
             console.log("회원가입 성공:",response.data);
-            window.location.href='/login';
+            window.location.href='/';
         } catch (error:any) {
             console.log('Registraion failed',error);
         }
@@ -70,11 +74,15 @@ const RegisterForm = () => {
                         <MDBRow>
 
                             <MDBCol md='6'>
-                                <MDBInput wrapperClass='mb-4' label='성' size='lg' id='form1' type='text'/>
+                                <MDBInput wrapperClass='mb-4' label='성' size='lg' id='form1' type='text'
+                                value={firstName}
+                                onChange={(e)=>setFirstName(e.target.value)}/>
                             </MDBCol>
 
                             <MDBCol md='6'>
-                                <MDBInput wrapperClass='mb-4' label='이름' size='lg' id='form2' type='text'/>
+                                <MDBInput wrapperClass='mb-4' label='이름' size='lg' id='form2' type='text'
+                                value={lastName}
+                                onChange={(e)=>setLastName(e.target.value)}/>
                             </MDBCol>
 
                         </MDBRow>
@@ -82,13 +90,15 @@ const RegisterForm = () => {
                         <MDBRow>
 
                             <MDBCol md='6'>
-                                <MDBInput wrapperClass='mb-4' label='생년월일(8자리)' size='lg' id='form3' type='text'/>
+                                <MDBInput wrapperClass='mb-4' label='생년월일(8자리)' size='lg' id='form3' type='text'
+                                value={birthday}
+                                onChange={(e) => setBirthDay(e.target.value)}/>
                             </MDBCol>
 
                             <MDBCol md='6' className='mb-4'>
                                 <h6 className="fw-bold">성별: </h6>
-                                <MDBRadio name='inlineRadio' id='inlineRadio1' value='option1' label='여성' inline />
-                                <MDBRadio name='inlineRadio' id='inlineRadio2' value='option2' label='남성' inline />
+                                <MDBRadio name='inlineRadio' checked={sex == '여성'} onChange={() => setSex('여성')} id='inlineRadio1' value='여성' label='여성' inline />
+                                <MDBRadio name='inlineRadio' checked={sex == '남성'} onChange={() => setSex('남성')} id='inlineRadio2' value='남성' label='남성' inline />
                             </MDBCol>
 
                         </MDBRow>
@@ -96,11 +106,15 @@ const RegisterForm = () => {
                         <MDBRow>
 
                             <MDBCol md='6'>
-                                <MDBInput wrapperClass='mb-4' label='이메일' size='lg' id='form4' type='email'/>
+                                <MDBInput wrapperClass='mb-4' label='이메일' size='lg' id='form4' type='email'
+                                value={email}
+                                onChange={(e)=>setEmail(e.target.value)}/>
                             </MDBCol>
 
                             <MDBCol md='6'>
-                                <MDBInput wrapperClass='mb-4' label='전화번호' size='lg' id='form5' type='rel'/>
+                                <MDBInput wrapperClass='mb-4' label='전화번호' size='lg' id='form5' type='rel'
+                                value={phoneNumber}
+                                onChange={(e)=>setPhoneNumber(e.target.value)}/>
                             </MDBCol>
 
                         </MDBRow>
@@ -108,11 +122,15 @@ const RegisterForm = () => {
                         <MDBRow>
 
                             <MDBCol md ='6'>
-                                <MDBInput wrapperClass="mb-4" label='비밀번호' size='lg' id='form4' type='email'/>
+                                <MDBInput wrapperClass="mb-4" label='비밀번호' size='lg' id='form4' type='email'
+                                value={password}
+                                onChange={(e)=>setPassword(e.target.value)}/>
                             </MDBCol>
 
                             <MDBCol md ='6'>
-                                <MDBInput wrapperClass="mb-4" label='비밀번호 확인' size='lg' id='form4' type='email'/>
+                                <MDBInput wrapperClass="mb-4" label='비밀번호 확인' size='lg' id='form4' type='email'
+                                value={confirmPassword}
+                                onChange={(e)=>setConfirmPassword(e.target.value)}/>
                             </MDBCol>
                         </MDBRow>
 
@@ -127,7 +145,7 @@ const RegisterForm = () => {
                                 { text: 'Subject 3', value: 4 }
                             ]}
                         />
-                        <MDBBtn className='mb-4' size='lg'>등록</MDBBtn>
+                        <MDBBtn className='mb-4' size='lg' onClick={handleRegister}>등록</MDBBtn>
 
                     </MDBCardBody>
                 </MDBCard>

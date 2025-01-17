@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:5173")
 public class LoginController {
