@@ -33,6 +33,9 @@ public class  UserService {
           user.setPassword(encoded);
           user.setAge(userDto.getAge());
           user.setSex(userDto.getSex());
+          user.setFirstName(user.getFirstName());
+          user.setLastName(user.getLastName());
+          user.setBirthday(user.getBirthday());
           user.setPhoneNumber(userDto.getPhoneNumber());
 
           userRepository.save(user);

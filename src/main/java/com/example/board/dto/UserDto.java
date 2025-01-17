@@ -10,6 +10,42 @@ public class UserDto {
     @NotEmpty(message = "Name is required")
     private String email;
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
+
+    @NotEmpty(message = "At least one character is existing")
+    @Size(min =1, message = "Firstname must be at least 1 charactrers long")
+    private String firstName;
+
+    @NotEmpty(message = "At least one character is existing")
+    @Size(min =1, message = "lastname must be at least 1 charactrers long")
+    private String lastName;
+
+    @NotEmpty(message = "none")
+    @Size(min=8,message = "not empty")
+    private int birthday;
+
     @NotEmpty(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
