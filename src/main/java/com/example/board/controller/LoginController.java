@@ -29,9 +29,12 @@ public class LoginController {
     //요청 처리 post
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto){
+        System.out.println("Post /api/login 호출돰");
+        System.out.println("요청 데이터: "+loginRequestDto);
         String loginResponse = loginService.login(loginRequestDto);
 
         if(loginResponse.equals("로그인 성공")){
+            System.out.println("로그인 성공");
             return ResponseEntity.ok("로그인 성공!");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패:" +loginResponse);

@@ -45,14 +45,14 @@ public class LoginService {
 
             if(passwordEncoder.matches(loginRequestDto.getPassword(),user.getPassword())){
 
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(user.getEmail(),loginRequestDto.getPassword());
-                Authentication authentication = authenticationManager.authenticate(authenticationToken);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                if(SecurityContextHolder.getContext().getAuthentication() == null){
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(user.getEmail(),loginRequestDto.getPassword());
+                    Authentication authentication = authenticationManager.authenticate(authenticationToken);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
 
-                String token = jwtTokenProvider.createToken(user.getEmail());//
-
-                return token;
+                return jwtTokenProvider.createToken(user.getEmail());
             } else {
                 return "로그인 실패: 비밀번호가 일치하지 않습니다.";
             }
