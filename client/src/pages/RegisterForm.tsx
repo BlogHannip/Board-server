@@ -37,7 +37,10 @@ const RegisterForm = () => {
 
     const handleRegister = async (e: React.FormEvent) =>{
         e.preventDefault();
-
+        if(password.length < 7){
+            setErrorMessage("비밀번호는 6자리 이상이어야합니다");
+            return;
+        }
         // 확인 검사
         if(password !== confirmPassword){
             setErrorMessage("비밀번호가 일치하지 않습니다.");
@@ -132,6 +135,7 @@ const RegisterForm = () => {
                                 value={confirmPassword}
                                 onChange={(e)=>setConfirmPassword(e.target.value)}/>
                             </MDBCol>
+                            {errorMessage && <div className="text-danger mb-3">{errorMessage}</div>}
                         </MDBRow>
 
                         <MDBSelect

@@ -31,7 +31,9 @@ const LoginForm = () => {
         console.log("로그인 시도 비밀번호:"+password);
 
         try {
-            const response = await apiClient.post('/login', { email, password });
+            const requestData = {email ,password};
+            console.log("전송할 데이터:", JSON.stringify(requestData));
+            const response = await apiClient.post('/login', requestData);
             console.log('로그인 성공:', response.data);
         } catch (err: any) {
             const message = err.response?.data?.message || '로그인 중 오류가 발생했습니다.';
