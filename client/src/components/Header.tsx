@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function Header() {
     return (
         <div>
@@ -5,9 +7,9 @@ export default function Header() {
                 <div className="container-fluid">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" href="#">
+                            <Link to={'/'} className="nav-link active" href="#">
                                 Analog
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">
