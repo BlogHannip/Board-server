@@ -1,4 +1,6 @@
 import {Link} from "react-router-dom";
+import Menu from "./Menu.tsx";
+
 
 export default function Header() {
     return (
@@ -24,6 +26,8 @@ export default function Header() {
                     </ul>
                 </div>
             </nav>
+
+            <Menu/>
         </div>
     );
 }
