@@ -1,0 +1,9 @@
+[33md0963d9[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to d0963d9
+[33m5bdf093[m HEAD@{1}: checkout: moving from main to 5bdf093
+[33md0963d9[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{2}: pull: Fast-forward
+[33m5bdf093[m HEAD@{3}: reset: moving to HEAD
+[33m5bdf093[m HEAD@{4}: pull: Fast-forward
+[33m20c1d2f[m HEAD@{5}: pull: Fast-forward
+[33m961cfdf[m HEAD@{6}: pull: Fast-forward
+[33m87c4b14[m HEAD@{7}: commit: logincontroller create
+[33mac73461[m HEAD@{8}: clone: from https://github.com/BlogHannip/Board-server.git
