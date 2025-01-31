@@ -1,12 +1,12 @@
 // Menu.tsx
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../store/store';  // 로그아웃 액션
+import { logout } from '../store/store.jsx';  // 로그아웃 액션
 import { useState } from 'react';
 
 export default function Menu() {
     const [loginForm, setLoginForm] = useState(false);  // 로그인 폼 상태 관리
-    const user = useSelector((state) => state.user);  // Redux에서 로그인된 사용자 정보 가져오기
+    const user = useSelector((state:any) => state.user);  // Redux에서 로그인된 사용자 정보 가져오기
     const dispatch = useDispatch();  // dispatch 함수
 
     // 로그인 폼 열기

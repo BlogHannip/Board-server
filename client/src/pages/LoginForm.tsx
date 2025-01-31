@@ -14,7 +14,7 @@ import {
 } from 'mdb-react-ui-kit';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import {useDispatch} from "react-redux";
-import {login} from "../store/store.tsx";
+import {login} from "../store/store.jsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -39,7 +39,12 @@ const LoginForm = () => {
             const response = await apiClient.post('/login', requestData);
             console.log('로그인 성공:', response.data);
 
-            dispatch(login(response.data.user));
+            const userData={
+                email: requestData.email,
+                password: requestData.password
+            }
+
+            dispatch(login(userData));
 
             alert("로그인이 성공했습니다!");
             navigate('/main');
