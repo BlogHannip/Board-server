@@ -27,10 +27,12 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/register","/api/login").permitAll() //로그인 ,회원가입은 허용
-                        .anyRequest().authenticated() //나머지 요청은 인증필요
+                        .requestMatchers("/api/register","/api/login").permitAll()
+                        //위와같은 주소창에서 접근을 허용한다. 만일안할경우 요청자체가 거부.
+                        .anyRequest().authenticated() //나머지 요청은 인증된 사용자만 접근이가능하게.
                 )
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        // 후에 기술되는 Cors설정관련파일에서 구체적인 교차 자원출처검증 설정.
 
         return http.build();
     }

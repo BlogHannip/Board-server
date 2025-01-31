@@ -57,7 +57,7 @@ const SectionFour: React.FC = () => {
             <div className="inner" style={{ width: "100%", height: "100%" }}>
                 <header className="align-center">
                     <h2>게시판</h2>
-                    <p>원하는 내용을 작성하셈.</p>
+                    <p>다양한 아이디어를 공유하세요.</p>
                 </header>
 
                 {/* 글 작성 폼 */}

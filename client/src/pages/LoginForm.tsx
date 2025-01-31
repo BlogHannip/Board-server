@@ -13,11 +13,14 @@ import {
     MDBCheckbox,
 } from 'mdb-react-ui-kit';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import {useDispatch} from "react-redux";
+import {login} from "../store/store.tsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const dispatch = useDispatch(); //dispatch 훅으로 클라이언트 상태관리
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -35,6 +38,10 @@ const LoginForm = () => {
             console.log("전송할 데이터:", JSON.stringify(requestData));
             const response = await apiClient.post('/login', requestData);
             console.log('로그인 성공:', response.data);
+
+            dispatch(login(response.data.user));
+
+            alert("로그인이 성공했습니다!");
             navigate('/main');
         } catch (err: any) {
             const message = err.response?.data?.message || '로그인 중 오류가 발생했습니다.';

@@ -58,6 +58,7 @@ const RegisterForm = () => {
             });
             console.log("회원가입 성공:",response.data);
             window.location.href='/';
+            alert("회원가입이 정상적으로 실행되었습니다.");
         } catch (error:any) {
             console.log('Registraion failed',error);
         }

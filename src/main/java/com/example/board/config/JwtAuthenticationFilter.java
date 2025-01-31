@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
 
         if(token != null && token.startsWith("Bearer")) {
-            token =token.substring(7); //Bearer 제가
+            token =token.substring(7); //Bearer 제거
 
             if(!jwtTokenProvider.isTokenExpired(token)){
                 String email = jwtTokenProvider.getEmailFromToken(token); //토큰에서 이메일 추출
