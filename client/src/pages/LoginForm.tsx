@@ -39,12 +39,10 @@ const LoginForm = () => {
             const response = await apiClient.post('/login', requestData);
             console.log('로그인 성공:', response.data);
 
-            const userData={
-                email: requestData.email,
-                password: requestData.password
-            }
+            const userEmail = response.data.email;
 
-            dispatch(login(userData));
+            //JWT는 쿠키에 자동으로 저장
+            dispatch(login({email: userEmail}));
 
             alert("로그인이 성공했습니다!");
             navigate('/main');

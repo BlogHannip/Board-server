@@ -1,13 +1,15 @@
 // Menu.tsx
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { logout } from '../store/store.jsx';  // 로그아웃 액션
 import { useState } from 'react';
+import apiClient from "../apiClient.tsx";
 
 export default function Menu() {
     const [loginForm, setLoginForm] = useState(false);  // 로그인 폼 상태 관리
     const user = useSelector((state:any) => state.user);  // Redux에서 로그인된 사용자 정보 가져오기
     const dispatch = useDispatch();  // dispatch 함수
+    const navigate = useNavigate();
 
     // 로그인 폼 열기
     const openLoginForm = () => {
@@ -20,8 +22,19 @@ export default function Menu() {
     };
 
     // 로그아웃 처리
-    const handleLogout = () => {
-        dispatch(logout());  // 로그아웃 액션 디스패치
+    const handleLogout = async () => {
+        try {
+            const response = await apiClient.post('/logout');
+            if(response.status === 200){
+                dispatch(logout());
+                alert("로그아웃 되었습니다.");
+                console.log("리다이렉트합니다.");
+                navigate('/main');
+                window.location.reload();
+            }
+        } catch (err:any){
+            console.error("로그아웃 오류", err);
+        }
     };
 
     return (
