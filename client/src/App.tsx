@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import './App.css';
-import Outer from "./components/Outer.tsx";
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
 import LoginForm from "./pages/LoginForm.tsx";
@@ -10,6 +9,7 @@ import SectionFour from "./components/SectionFour.tsx";
 import Profile from "./components/Profile.tsx";
 import Background from "./components/Background.tsx";
 import News from "./components/News.tsx";
+import MyPage from "./components/MyPage.tsx";
 
 function App() {
     const location = useLocation();
@@ -25,7 +25,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
-                    <Route path="/user" element={<Outer />} />
+                    <Route path="/user" element={<MyPage />} />
                 </Routes>
             </div>
 
