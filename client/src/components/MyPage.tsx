@@ -1,19 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import apiClient from "../apiClient.tsx";
+import {useSelector} from "react-redux";
+import axios from "axios";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 const MyPage: React.FC = () => {
-    // 가상의 사용자 데이터
-    const user = {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        password: '********',
-        sex: 'Male',
-        birthday: 1990,
-        phoneNumber: '010-1234-5678',
-        content: '이것은 사용자 설명입니다. 여기에 자신에 대한 정보를 적을 수 있습니다.',
-        avatarUrl: 'https://via.placeholder.com/150', // 프로필 사진 URL
-    };
+
+    const email = useSelector((state:any) => state.user?.email);
+    const [user, setUser] = useState<any>(null);
+    const [error,setError] =useState('');
+
+    useEffect(() => {
+        if(!email){
+            setError("로그인필요!");
+            return;
+        }
+
+        apiClient.get(`/user/${email}`)
+            .then(response => setUser(response.data))
+            .catch(error => setError("사용자 정보 불러오기 실패"));
+    }, [email]);
+
+    if (!user) {
+        return <div>{error || "로딩 중..."}</div>;
+    }
 
     return (
         <div className="container mt-5">

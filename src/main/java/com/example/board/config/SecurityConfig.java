@@ -29,6 +29,7 @@ public class SecurityConfig{
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/register","/api/login").permitAll()
                         .requestMatchers("/api/logout").permitAll() //로그아웃도 허용.
+                        .requestMatchers("/api/user/{email}").permitAll()
                         //위와같은 주소창에서 접근을 허용한다. 만일안할경우 요청자체가 거부.
                         .anyRequest().authenticated() //나머지 요청은 인증된 사용자만 접근이가능하게.
                 )

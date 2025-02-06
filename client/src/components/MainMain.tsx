@@ -46,11 +46,10 @@ export default function MainMa() {
                     {/* 기존 텍스트 부분 */}
                     <div className="content text-center">
                         <header className="align-center">
-                            <h2>블로그 한입</h2>
+                            <h2>블로그 Analog</h2>
                             <p>개발자들을 위한 블로그</p>
                         </header>
                         <hr />
-                        <p>환영합니다.</p>
                     </div>
                 </div>
             </div>
