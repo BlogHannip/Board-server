@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import './App.css';
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
@@ -10,9 +10,19 @@ import Profile from "./components/Profile.tsx";
 import Background from "./components/Background.tsx";
 import News from "./components/News.tsx";
 import MyPage from "./components/MyPage.tsx";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
 
 function App() {
     const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const email = localStorage.getItem('email');
+        if(!email){
+            navigate('login');
+        }
+    }, [navigate]);
 
     // 특정 경로에서는 전체 화면을 차지하도록 설정
     const isFullPage = ["/login", "/register", "/user"].includes(location.pathname);

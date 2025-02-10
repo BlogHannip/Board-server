@@ -27,9 +27,7 @@ public class SecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/register","/api/login").permitAll()
-                        .requestMatchers("/api/logout").permitAll() //로그아웃도 허용.
-                        .requestMatchers("/api/user/{email}").permitAll()
+                        .requestMatchers("/api/register","/api/login","/api/check-login","/api/logout","/api/user/{email}").permitAll()
                         //위와같은 주소창에서 접근을 허용한다. 만일안할경우 요청자체가 거부.
                         .anyRequest().authenticated() //나머지 요청은 인증된 사용자만 접근이가능하게.
                 )
@@ -44,8 +42,13 @@ public class SecurityConfig{
         CorsConfiguration configuration =new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT","OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization","Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization","Content-Type","Cookie"));
+        configuration.addExposedHeader("Set-Cookie");
         configuration.setAllowCredentials(true);
+
+        configuration.addAllowedHeader("*");
+
+        configuration.addExposedHeader("*");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);

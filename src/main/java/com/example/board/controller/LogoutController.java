@@ -21,7 +21,7 @@ public class LogoutController {
 
         new SecurityContextLogoutHandler().logout(request,response,SecurityContextHolder.getContext().getAuthentication());
 
-        ResponseCookie cookie = ResponseCookie.from("jwt","")
+        ResponseCookie accessCookie = ResponseCookie.from("accessToken","")
                 .httpOnly(true)
                 .secure(false) //로컬에서는 false , 배포시에는 true
                 .path("/")
@@ -29,7 +29,16 @@ public class LogoutController {
                 .sameSite("Lax")
                 .build();
 
-    response.addHeader(HttpHeaders.SET_COOKIE ,cookie.toString());
+        ResponseCookie refreshCookie = ResponseCookie.from("refreshToken","")
+                .httpOnly(true)
+                .secure(false) //로컬에서는 false , 배포시에는 true
+                .path("/")
+                .maxAge(0)
+                .sameSite("Lax")
+                .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE ,accessCookie.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE ,refreshCookie.toString());
 
         return ResponseEntity.ok("로그아웃 성공");
     }

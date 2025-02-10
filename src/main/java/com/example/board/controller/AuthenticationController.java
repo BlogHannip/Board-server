@@ -1,0 +1,77 @@
+package com.example.board.controller;
+
+import com.example.board.dto.LoginResponseDto;
+import com.example.board.service.JwtTokenService;
+import com.example.board.service.LoginService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(value = "http://localhost:5173" ,allowCredentials = "true")
+public class AuthenticationController {
+    private final JwtTokenService jwtTokenService;
+
+    @Autowired
+    public AuthenticationController(JwtTokenService jwtTokenService){
+        this.jwtTokenService =jwtTokenService;//생성자 주입
+    }
+
+    @GetMapping("/check-login")
+    public ResponseEntity<?> checkLogin(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if(cookies == null){
+            System.out.println("쿠키없다 다시해!");
+        } else {
+            for(Cookie cookie : cookies){
+                System.out.println("쿠키확인:"+cookie.getName()+ ": " + cookie.getValue());
+            }
+        }
+
+
+
+        String accessToken = getCookieValue(request, "accessToken");
+        String refreshToken = getCookieValue(request, "refreshToken");
+
+        if (accessToken != null) {
+            if (!jwtTokenService.isTokenExpired(accessToken)) {
+                String email = jwtTokenService.getEmailFromToken(accessToken);
+                return ResponseEntity.ok(new LoginResponseDto(accessToken, refreshToken, "로그인유지됨",email));
+            }
+        }
+
+        if (refreshToken != null) {
+            if (!jwtTokenService.isTokenExpired(refreshToken)) {
+                String email = jwtTokenService.getEmailFromToken(refreshToken);
+                String newAccessToken = jwtTokenService.createAccessToken(email);
+
+                return ResponseEntity.ok()
+                        .header("Set-Cookie", "accessToken:" + newAccessToken + "; HttpOnly: Path=/; Max-Age=1800")
+                        .body(new LoginResponseDto(accessToken,refreshToken,"토큰재발급",email));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null));
+    }
+
+    private String getCookieValue(HttpServletRequest request, String cookieName){
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return null;
+        }
+        for (Cookie cookie : cookies) {
+            if (cookieName.equals(cookie.getName())) {
+                return cookie.getValue();
+            }
+        }
+        return null;
+    }
+}
+
+

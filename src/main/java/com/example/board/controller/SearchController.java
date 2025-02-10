@@ -17,6 +17,7 @@ public class SearchController {
 
     @GetMapping("/{email}")
     public User getUserByEmail(@PathVariable String email){
+        System.out.println("요청된 이메일: " + email);
         return searchService.getUserByEmail(email);
     }
 }

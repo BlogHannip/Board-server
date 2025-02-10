@@ -2,18 +2,19 @@ import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import apiClient from "../apiClient.tsx";
 import {useSelector} from "react-redux";
-import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+import {RootState} from "../store/store.tsx";
 
 const MyPage: React.FC = () => {
 
-    const email = useSelector((state:any) => state.user?.email);
+    //Redux에서 로그인한 유저 정보 가지고 오기
+    const email = useSelector((state:any) => state.auth?.email);
+    const isAuthenticated = useSelector((state:RootState) => state.auth.isAuthenticated);
+
     const [user, setUser] = useState<any>(null);
     const [error,setError] =useState('');
 
     useEffect(() => {
-        if(!email){
+        if(!email || !isAuthenticated){
             setError("로그인필요!");
             return;
         }
@@ -21,7 +22,7 @@ const MyPage: React.FC = () => {
         apiClient.get(`/user/${email}`)
             .then(response => setUser(response.data))
             .catch(error => setError("사용자 정보 불러오기 실패"));
-    }, [email]);
+    }, [email,isAuthenticated]);
 
     if (!user) {
         return <div>{error || "로딩 중..."}</div>;

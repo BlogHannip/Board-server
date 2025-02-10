@@ -1,6 +1,7 @@
 package com.example.board.service;
 
 import com.example.board.dto.LoginRequestDto;
+import com.example.board.dto.LoginResponseDto;
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class LoginService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    public String login(LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         String email = loginRequestDto.getEmail(); //loginRequstDto에서 받아오기
 
         if (email == null) { //없으면 에러 던져서 이메일 요청
@@ -58,13 +59,16 @@ public class LoginService {
                     //SecurityContextHolder를 통해 사용자의 인증사항들을 수정
                 }
 
+                String accessToken = jwtTokenProvider.createAccessToken(user.getEmail());
+                String refreshToken = jwtTokenProvider.createRefreshToken(user.getEmail());
+
                 // JWT 토큰 생성
-                return jwtTokenProvider.createToken(user.getEmail());
+                return new LoginResponseDto(accessToken,refreshToken,"로그인성공",user.getEmail());
             } else {
-                return "로그인 실패: 비밀번호가 일치하지 않습니다.";
+                return new LoginResponseDto(null,null,"로그인실패:비밀번호가 틀림",null);
             }
         } else {
-            return "로그인 실패: 이메일을 찾을 수 없습니다.";
+            return new LoginResponseDto(null,null,"로그인실패: 이메일을 찾을수없음",null);
         }
     }
 }

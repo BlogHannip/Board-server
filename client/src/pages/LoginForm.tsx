@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {login} from "../store/authSlice.tsx";
 import apiClient from '../apiClient.tsx';
 import {
     MDBBtn,
@@ -14,7 +15,6 @@ import {
 } from 'mdb-react-ui-kit';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import {useDispatch} from "react-redux";
-import {login} from "../store/store.jsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -30,18 +30,20 @@ const LoginForm = () => {
             return;
         }
 
-        console.log("로그인 시도 이메일:"+email);
-        console.log("로그인 시도 비밀번호:"+password);
 
         try {
             const requestData = {email ,password};
-            console.log("전송할 데이터:", JSON.stringify(requestData));
             const response = await apiClient.post('/login', requestData);
             console.log('로그인 성공:', response.data);
 
+            const jwtToken = response.data.token;
+            console.log('토큰 :' , jwtToken );
+
             const userEmail = response.data.email;
 
-            //JWT는 쿠키에 자동으로 저장
+            localStorage.setItem('email',userEmail);
+
+            //Redux 상태 업데이트
             dispatch(login({email: userEmail}));
 
             alert("로그인이 성공했습니다!");
