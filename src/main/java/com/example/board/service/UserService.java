@@ -22,7 +22,7 @@ public class  UserService {
     @Autowired
     public UserService(UserRepository userRepository , PasswordEncoder passwordEncoder){
         this.userRepository =userRepository;
-        this.passwordEncdoer = passwordEncoder;  //생성자로 의존성 주
+        this.passwordEncdoer = passwordEncoder;  //생성자로 의존성 주입
     }
 
     public String register(@Validated UserDto userDto){

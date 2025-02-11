@@ -132,3 +132,13 @@ h3 {
     font-size: 24px; /* 제목 크기 */
     margin-bottom: 20px; /* 제목과 콘텐츠 사이 간격 */
 }
+
+.custom-hover-link {
+    margin-right: 10px;
+    color:white;
+    transition: color 0.3s;
+}
+
+.custom-hover-link:hover {
+    color:skyblue;
+}

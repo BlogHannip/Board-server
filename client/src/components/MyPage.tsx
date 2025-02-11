@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import apiClient from "../apiClient.tsx";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/store.tsx";
+import {checkLogin} from "../store/authSlice.tsx";
 
 const MyPage: React.FC = () => {
 
@@ -12,6 +13,12 @@ const MyPage: React.FC = () => {
 
     const [user, setUser] = useState<any>(null);
     const [error,setError] =useState('');
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(checkLogin());
+        console.log("로그인 유지")
+    }, []);
 
     useEffect(() => {
         if(!email || !isAuthenticated){
