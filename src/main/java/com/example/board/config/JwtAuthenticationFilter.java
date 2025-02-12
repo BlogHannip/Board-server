@@ -7,7 +7,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,10 +21,12 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenService jwtTokenProvider;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public JwtAuthenticationFilter(JwtTokenService jwtTokenProvider) {
+    public JwtAuthenticationFilter(JwtTokenService jwtTokenProvider , UserDetailsService userDetailsService) {
         this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -41,17 +46,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token != null && !jwtTokenProvider.isTokenExpired(token)) { //만료가아니고 토큰이있다면
             String email = jwtTokenProvider.getEmailFromToken(token); //토큰에서 이메일 추출
 
+            //UserDetailsService 에서 사용자 정보 추출
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-            JwtAuthenticationToken authentication = new JwtAuthenticationToken(email, null);
+            UsernamePasswordAuthenticationToken authentication
+                    = new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             //인증될경우 SecurityContextHolder에 email을 저장하라
 
             System.out.println("Authenticated user: " + email);
-
-            System.out.println("SecurityContext 인증 객체 :" +SecurityContextHolder.getContext().getAuthentication());
+            System.out.println("SecurityContext 인증 객체 :" +SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         }
 
         filterChain.doFilter(request,response);
+
+        System.out.println("SecurityContext 인증객체 (필터 종료 후):"+SecurityContextHolder.getContext().getAuthentication());
    }
 }

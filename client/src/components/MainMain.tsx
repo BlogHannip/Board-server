@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 export default function MainMa() {
     return (
-        <div className="d-flex flex-column align-items-center" style={{ width: "100vw", maxWidth: "1200px", height: "auto", marginBottom: "20px", overflow: "hidden" }}>
+        <div className=" inner d-flex flex-column align-items-center" style={{ width: "100vw", maxWidth: "1200px", height: "auto", marginBottom: "20px", overflow: "hidden" }}>
             {/* Carousel */}
             <Carousel style={{ maxWidth: "1200px" }}>
                 <Carousel.Item>

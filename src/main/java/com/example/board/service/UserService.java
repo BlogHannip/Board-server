@@ -40,6 +40,7 @@ public class  UserService {
           user.setLastName(userDto.getLastName());
           user.setBirthday(userDto.getBirthday());
           user.setPhoneNumber(userDto.getPhoneNumber());
+          user.setRole("ROLE_USER");
 
          logger.debug("User 객체 정보: {}", user);
           userRepository.save(user);

@@ -1,5 +1,6 @@
 package com.example.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,7 +11,6 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@NoArgsConstructor // 기본생성자를 만드는데 같은 패키지내에서 참조
 //protected로 설정이유:jpa에서 엔티티 클래스 만들때 프록시 기술을 사용할수있도록 설정하기위함
 @Getter
 public class BlogPost {
@@ -19,6 +19,9 @@ public class BlogPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
+
+    public BlogPost(){
+    }
 
     public String getTitle() {
         return title;
@@ -47,8 +50,8 @@ public class BlogPost {
     @Column(nullable = false)
     private String title;
 
-    @Lob
-    @Column(name = "content", nullable = false)
+    @Lob //실제로는 문자열인데 숫자 id로 저장
+    @Column(columnDefinition = "TEXT",name = "content", nullable = false)
     private String content;
 
     @Column(nullable = false, updatable = false)
@@ -68,15 +71,19 @@ public class BlogPost {
         this.updateAt = LocalDateTime.now();
     }
 
-    @Builder
-    public BlogPost(String title ,String content ,User user){
-        this.title = title;
-        this.content = content;
-        this.user = user;
-    }
-
     //사용자와 연관관계
     @ManyToOne //여러개의 블로그 글들을 한명의 사용자를 참조한다.
     @JoinColumn(name = "user_email", referencedColumnName = "email")//이메일 외래키로 참조
     private User user;
+
+    public BlogPost(String title, String content, User user){
+        this.title =title;
+        this.content =content;
+        this.user =user;
+    }
+
+    @JsonProperty("id")
+    public Long getId(){
+        return id;
+    }
 }

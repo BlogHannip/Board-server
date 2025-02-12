@@ -4,6 +4,8 @@ import com.example.board.entity.User;
 import com.example.board.service.SearchService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/user")
 @CrossOrigin("http://localhost:5173")

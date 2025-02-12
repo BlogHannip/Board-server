@@ -35,6 +35,17 @@ public class User {
     @Lob
     private String content;
 
+    @Column(nullable = false)
+    private String role = "ROLE_USER"; // 기본값 유저 권한
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role =role;
+    }
+
     public String getFirstName() {
         return firstName;
     }

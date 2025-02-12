@@ -17,7 +17,7 @@ export default function QuillEditor() {
             const response = await fetch("http://localhost:8080/api/posts" ,{
                 method: "POST",
                 headers: {"Content-Type" : "application/json"} ,
-                credential: "include" ,
+                credentials: "include" ,
                 body:JSON.stringify(postData),
             });
 

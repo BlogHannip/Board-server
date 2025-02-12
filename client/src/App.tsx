@@ -16,6 +16,7 @@ import {checkLogin} from "./store/authSlice.tsx";
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "./store/store.tsx";
 import Weather from "./components/Weather.tsx";
+import BlogList from "./components/BlogList.tsx";
 
 function App() {
     const location = useLocation();
@@ -52,7 +53,7 @@ function App() {
                 <Weather/>
             )}
 
-            {!isFullPage && <SectionFour />} {/* 특정 경로가 아닐 때만 SectionFour 표시 */}
+            {!isFullPage && <BlogList />} {/* 특정 경로가 아닐 때만 SectionFour 표시 */}
             {!isFullPage && (
                 <div>
                     <Footer />
