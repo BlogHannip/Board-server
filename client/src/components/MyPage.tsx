@@ -16,11 +16,6 @@ const MyPage: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(checkLogin());
-        console.log("로그인 유지")
-    }, []);
-
-    useEffect(() => {
         if(!email || !isAuthenticated){
             setError("로그인필요!");
             return;

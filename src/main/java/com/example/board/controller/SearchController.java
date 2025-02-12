@@ -2,7 +2,6 @@ package com.example.board.controller;
 
 import com.example.board.entity.User;
 import com.example.board.service.SearchService;
-import com.example.board.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

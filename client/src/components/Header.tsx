@@ -12,10 +12,6 @@ export default function Header() {
     const navigate = useNavigate();
     const [hovered,serHovered] = useState(false);
 
-    useEffect(() => {
-        dispatch(checkLogin());
-    }, []);
-
     const handleLogout = async () =>{
         try {
             await dispatch(logout()).unwrap();
@@ -35,7 +31,7 @@ export default function Header() {
                         <Link to="/" className="nav-link active">Analog</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link">내 블로그</Link>
+                        <Link to="/edit" className="nav-link">내 블로그</Link>
                     </li>
                     <li className="nav-item">
                         <span className="nav-link disabled">탐색</span>
