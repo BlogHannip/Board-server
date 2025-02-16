@@ -1,57 +1,57 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import apiClient from "../apiClient.tsx";
 
 interface BlogPost {
-    id:number;
+    id: number;
     title: string;
     content: string;
-    createdAt :string;
+    createdAt: string;
 }
 
-const BlogList = () => {
-    const [blogs, setBlogs] =useState<BlogPost[]>([]);
+const BlogList: React.FC = () => {
+    const [blogs, setBlogs] = useState<BlogPost[]>([]);
 
     useEffect(() => {
-        apiClient.get("my-blogs" ,{
-            withCredentials:true,
-        })
-            .then((response) =>{
+        apiClient
+            .get("my-blogs", { withCredentials: true })
+            .then((response) => {
                 const sortedBlogs = response.data.sort(
-                    (a:BlogPost,b:BlogPost) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                    (a: BlogPost, b: BlogPost) =>
+                        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
                 );
-                setBlogs(sortedBlogs.slice(0,3));
+                setBlogs(sortedBlogs.slice(0, 3));
             })
-            .catch((err:any) => {
-                console.error("블로그 불러오기 실패" ,err);
+            .catch((err: any) => {
+                console.error("블로그 불러오기 실패", err);
             });
     }, []);
 
     return (
-        <div
-            className="inner d-flex flex-column align-items-center"
-            style={{ width: "100vw", maxWidth: "1200px", height: "auto", marginBottom: "20px", overflow: "hidden" }}
-        >
-            <div
-                className="d-flex justify-content-between flex-wrap gap-3"
-                style={{ width: "100%", display: "flex", flexWrap: "wrap", gap: "20px" }}
-            >
-                {blogs.map(blog => (
+        <div className="inner flex flex-col items-center w-full max-w-[1200px] mb-5 overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
+                {blogs.map((blog) => (
                     <div
                         key={blog.id}
-                        className="p-4 border rounded-lg shadow-md"
-                        style={{ flex: "1 1 calc(25% - 20px)", minWidth: "250px", maxWidth: "280px" }} // 4개씩 배치되도록 설정
+                        className="p-5 bg-white border border-gray-200 rounded-xl shadow-md transition-all hover:shadow-lg hover:-translate-y-1"
                     >
-                        <h2 className="text-lg font-bold">{blog.title}</h2>
-                        <p className="text-sm text-gray-500">{new Date(blog.createdAt).toLocaleDateString()}</p>
-                        <p className="text-gray-700">{blog.content.substring(0, 50)}...</p>
-                        <button className="mt-2 p-2 bg-blue-500 text-white rounded">상세보기</button>
+                        <h2 className="text-xl font-bold text-gray-900">{blog.title}</h2>
+                        <p className="text-sm text-gray-400">
+                            {new Date(blog.createdAt).toLocaleDateString()}
+                        </p>
+                        {/* ✅ 블로그 내용 HTML 렌더링 (이미지 포함) */}
+                        <div
+                            className="text-gray-600 mt-2 blog-content"
+                            dangerouslySetInnerHTML={{ __html: blog.content }}
+                        />
+                        <button className="mt-3 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition">
+                            상세보기
+                        </button>
                     </div>
                 ))}
             </div>
         </div>
     );
-
-}
+};
 
 export default BlogList;

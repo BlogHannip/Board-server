@@ -1,4 +1,4 @@
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import './App.css';
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
@@ -11,10 +11,10 @@ import MyPage from "./components/MyPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-summernote/dist/react-summernote.css";
 import QuillEditor from "./components/QuillEditor.tsx";
-import {useEffect} from "react";
-import {checkLogin} from "./store/authSlice.tsx";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "./store/store.tsx";
+import { useEffect } from "react";
+import { checkLogin } from "./store/authSlice.tsx";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./store/store.tsx";
 import Weather from "./components/Weather.tsx";
 import BlogList from "./components/BlogList.tsx";
 
@@ -28,7 +28,7 @@ function App() {
     }, []);
 
     // 특정 경로에서는 전체 화면을 차지하도록 설정
-    const isFullPage = ["/login", "/register", "/user","/edit"].includes(location.pathname);
+    const isFullPage = ["/login", "/register", "/user", "/edit"].includes(location.pathname);
 
     return (
         <div className="App">
@@ -39,21 +39,25 @@ function App() {
                     <Route path="/login" element={<LoginForm />} />
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/user" element={<MyPage />} />
-                    <Route path="/edit" element={<QuillEditor/>} />
+                    <Route path="/edit" element={<QuillEditor />} />
                 </Routes>
             </div>
 
             {!isFullPage && (
-                <div className="" style={{marginTop:"-5px"}}>
-                    <MainMa />
+                <div className="main-content-container">
+                    {/* MainMa: 가운데 정렬 */}
+                    <div className="main-content">
+                        <MainMa />
+                    </div>
+
+                    <div className="weather-content">
+                        <Weather />
+                    </div>
                 </div>
             )}
 
-            {!isFullPage && (
-                <Weather/>
-            )}
-
             {!isFullPage && <BlogList />} {/* 특정 경로가 아닐 때만 SectionFour 표시 */}
+
             {!isFullPage && (
                 <div>
                     <Footer />

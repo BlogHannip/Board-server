@@ -55,7 +55,7 @@ const Weather: React.FC = () => {
             <div className="container">
                 <div className="row d-flex justify-content-center align-items-center">
                     {/* GitHub 프로필 카드 */}
-                    <div className="col-md-6 d-flex justify-content-center">
+                    <div className="col-md-6 d-flex justify-content-center mb-4 mb-md-0">
                         <div className="card bg-dark text-white border-0 p-4" style={{ borderRadius: "40px", maxWidth: "400px", width: "100%" }}>
                             <h4 className="text-center">GitHub Profile</h4>
                             <img src={githubData?.avatar_url} className="img-fluid rounded-circle mx-auto d-block" alt="GitHub Avatar" style={{ width: "100px" }} />
@@ -63,7 +63,7 @@ const Weather: React.FC = () => {
                             <p className="text-center">@{githubData?.login}</p>
                             <p className="text-center">끈기 있는 개발자</p>
                             <p className="text-center">{githubData?.bio}</p>
-                            <a href={githubData?.html_url} className="btn btn-primary w-100" target="_blank">Visit GitHub</a>
+                            <a href={githubData?.html_url} className="btn btn-primary w-100" target="_blank" rel="noopener noreferrer">방문</a>
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@ const Weather: React.FC = () => {
                             <img src={`https://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" className="mx-auto d-block" style={{ width: "80px" }} />
                             <p className="display-2 text-center">{weather.temp.toFixed(1)}°C</p>
                             <p className="text-center">
-                                 체감온도: <strong>{(weather.temp - 1).toFixed(1)}°C</strong>
+                                체감온도: <strong>{(weather.temp - 1).toFixed(1)}°C</strong>
                             </p>
                             <h5 className="text-center">{weather.desc}</h5>
                         </div>

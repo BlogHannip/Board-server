@@ -142,3 +142,82 @@ h3 {
 .custom-hover-link:hover {
     color:skyblue;
 }
+
+/* 전체 컨테이너 설정 */
+.main-content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* 상단에 정렬 */
+    gap: 30px; /* MainMa와 Weather 사이의 간격 */
+}
+
+/* MainMa: 가운데 정렬 */
+.main-content {
+    flex: 1;
+    max-width: 70%; /* MainMa의 최대 너비 제한 */
+    z-index: 1; /* MainMa가 기본적으로 위에 오도록 설정 */
+}
+
+/* Weather: 왼쪽 사이드로 고정 */
+.weather-content {
+    position: relative;
+    width: 300px; /* Weather의 너비를 넓게 설정 */
+    height: auto; /* 세로 크기를 자동으로 조정 */
+    z-index: 0;
+    top: 0; /* 상단에 고정 */
+    left: 20px; /* 왼쪽에 고정 */
+    display: flex; /* 가로로 배치되도록 설정 */
+    flex-direction: column; /* 세로로 나열되는 텍스트를 줄바꿈하지 않도록 설정 */
+    padding: 15px;
+    background-color: #f9f9f9; /* 배경 색상 추가 */
+    border-radius: 8px; /* 모서리를 둥글게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    overflow: hidden;
+}
+
+/* Weather 내부 텍스트 스타일 */
+.weather-content p {
+    white-space: normal; /* 텍스트가 길어질 경우 줄바꿈 되도록 설정 */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+/*!* 다른 컴포넌트들이 겹치지 않도록 하여 공간 확보 *!*/
+/*.container {*/
+/*    max-width: 100%;*/
+/*}*/
+
+/* 로그인, 회원가입, 마이페이지 화면에서의 전체화면 적용 */
+.full-page {
+    width: 100%;
+    padding: 0;
+}
+
+/* CSS를 추가하여 두 카드를 옆으로 배치 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* 카드 사이의 간격 */
+}
+
+/* 모바일 대응: 모바일에서는 세로로 배치되게 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* 세로로 배치 */
+        align-items: center;
+    }
+}
+
+.blog-content img {
+    width: 120px;  /* 작은 썸네일 크기 */
+    height: 80px;  /* 비율 유지 */
+    object-fit: cover; /* 비율 유지하면서 꽉 채우기 */
+    border-radius: 6px; /* 둥근 모서리 */
+    display: block;
+    margin: 5px auto; /* 가운데 정렬 */
+}
+
+
+/* 추가적인 스타일을 여기서 설정 가능합니다 */
