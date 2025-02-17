@@ -1,3 +1,4 @@
+/* 전체 컨테이너 설정 */
 .wrapper {
     display: flex;
     justify-content: center;
@@ -42,7 +43,7 @@
     text-decoration: underline;
 }
 
-/*프로필 css */
+/* 프로필 css */
 .left-sidebar {
     flex: 1;
     max-width: 500px;
@@ -77,7 +78,7 @@
     border-radius: 15px;
 }
 
-
+/* 뉴스 카드 스타일 */
 .news {
     background-color: #fff;
     padding: 15px;
@@ -97,6 +98,7 @@
     font-size: 1.2em;
 }
 
+/* YouTube, Instagram, FunPhoto */
 .youtube-video, .instagram-post, .fun-photo {
     width: 100%; /* 부모 요소의 너비에 맞게 설정 */
     max-width: 800px; /* 최대 너비 설정 */
@@ -108,6 +110,7 @@
     height: 350px; /* 고정 높이 설정 */
 }
 
+/* 게시판 컨테이너 스타일 */
 .board-container {
     max-width: 800px; /* 게시판 전체 너비 */
     margin: 0 auto; /* 가운데 정렬 */
@@ -149,6 +152,7 @@ h3 {
     justify-content: space-between;
     align-items: flex-start; /* 상단에 정렬 */
     gap: 30px; /* MainMa와 Weather 사이의 간격 */
+    margin-bottom: 30px;
 }
 
 /* MainMa: 가운데 정렬 */
@@ -160,19 +164,12 @@ h3 {
 
 /* Weather: 왼쪽 사이드로 고정 */
 .weather-content {
-    position: relative;
-    width: 300px; /* Weather의 너비를 넓게 설정 */
-    height: auto; /* 세로 크기를 자동으로 조정 */
-    z-index: 0;
-    top: 0; /* 상단에 고정 */
-    left: 20px; /* 왼쪽에 고정 */
-    display: flex; /* 가로로 배치되도록 설정 */
-    flex-direction: column; /* 세로로 나열되는 텍스트를 줄바꿈하지 않도록 설정 */
-    padding: 15px;
+    flex: 0 1 300px; /* Weather의 최소 너비 300px 설정 */
     background-color: #f9f9f9; /* 배경 색상 추가 */
     border-radius: 8px; /* 모서리를 둥글게 */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     overflow: hidden;
+    padding: 15px;
 }
 
 /* Weather 내부 텍스트 스타일 */
@@ -183,18 +180,13 @@ h3 {
     word-wrap: break-word;
 }
 
-/*!* 다른 컴포넌트들이 겹치지 않도록 하여 공간 확보 *!*/
-/*.container {*/
-/*    max-width: 100%;*/
-/*}*/
-
 /* 로그인, 회원가입, 마이페이지 화면에서의 전체화면 적용 */
 .full-page {
     width: 100%;
     padding: 0;
 }
 
-/* CSS를 추가하여 두 카드를 옆으로 배치 */
+/* 추가적인 스타일 */
 .container {
     display: flex;
     justify-content: space-between;
@@ -204,20 +196,80 @@ h3 {
 
 /* 모바일 대응: 모바일에서는 세로로 배치되게 */
 @media (max-width: 768px) {
-    .container {
+    .main-content-container {
         flex-direction: column; /* 세로로 배치 */
         align-items: center;
     }
+
+    .main-content {
+        max-width: 100%; /* 화면 크기에 맞게 최대 너비 조정 */
+    }
+
+    .weather-content {
+        max-width: 100%; /* Weather가 화면에 맞게 크기 조정 */
+    }
+
+    /* 프로필 이미지 크기 조정 */
+    .profile-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .wrapper {
+        max-width: 100%; /* 화면 크기에 맞게 최대 너비 조정 */
+    }
+
+    .board-container {
+        max-width: 100%; /* 게시판이 모바일에서 화면에 맞게 조정 */
+    }
 }
 
-.blog-content img {
-    width: 120px;  /* 작은 썸네일 크기 */
-    height: 80px;  /* 비율 유지 */
-    object-fit: cover; /* 비율 유지하면서 꽉 채우기 */
-    border-radius: 6px; /* 둥근 모서리 */
-    display: block;
-    margin: 5px auto; /* 가운데 정렬 */
+/* 전체 레이아웃 설정 */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* 카드 간 간격 */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* 가운데 정렬 */
 }
 
+/* 카드 스타일 */
+.card {
+    width: 32%; /* 카드 크기 (3개의 카드를 한 줄에 배치하기 위한 비율) */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
 
-/* 추가적인 스타일을 여기서 설정 가능합니다 */
+.card:hover {
+    transform: translateY(-10px); /* 마우스 호버시 카드가 살짝 올라가는 효과 */
+}
+
+/* 이미지 스타일 */
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+/* 카드 내용 스타일 */
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.card-content p {
+    margin-top: 10px;
+    color: #555;
+}
