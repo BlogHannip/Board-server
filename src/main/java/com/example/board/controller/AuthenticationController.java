@@ -62,6 +62,19 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null ,0));
     }
 
+    @GetMapping("/me")
+    public ResponseEntity<?> getMe(HttpServletRequest request){
+        String accessToken = getCookieValue(request, "accessToken");
+
+        if(accessToken != null && !jwtTokenService.isTokenExpired(accessToken)){
+            String email = jwtTokenService.getEmailFromToken(accessToken);
+            long exp = jwtTokenService.getExpirationTimeFromToken(accessToken);
+            return  ResponseEntity.ok(new LoginResponseDto(accessToken,null,"로그인 유지", email,exp));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인 필요",null,0));
+    }
+
     private String getCookieValue(HttpServletRequest request, String cookieName){
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {

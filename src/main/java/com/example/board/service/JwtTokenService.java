@@ -22,7 +22,7 @@ public class JwtTokenService {
         return Jwts.builder()
                 .setSubject(email) //토큰 주제 ,사용자정보
                 .setIssuedAt(new Date(System.currentTimeMillis())) //발행시간
-                .setExpiration(new Date(System.currentTimeMillis() + 360000)) //만료시간
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) //만료시간
                 .signWith(SignatureAlgorithm.HS256 ,secretKey)//서명 알고리즘과 시크릿키
                 .compact(); //토큰생성
     }
@@ -31,7 +31,7 @@ public class JwtTokenService {
         return Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+400000))
+                .setExpiration(new Date(System.currentTimeMillis()+4000000))
                 .signWith(SignatureAlgorithm.HS256,secretKey)
                 .compact();
     }
