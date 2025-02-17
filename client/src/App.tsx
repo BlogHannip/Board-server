@@ -5,7 +5,6 @@ import Header from "./components/Header.tsx";
 import LoginForm from "./pages/LoginForm.tsx";
 import RegisterForm from "./pages/RegisterForm.tsx";
 import MainMa from "./components/MainMain.tsx";
-import SectionFour from "./components/SectionFour.tsx";
 import Background from "./components/Background.tsx";
 import MyPage from "./components/MyPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store/store.tsx";
 import Weather from "./components/Weather.tsx";
 import BlogList from "./components/BlogList.tsx";
+import BlogAll from "./components/AllBlogs.tsx";
 
 function App() {
     const location = useLocation();
@@ -28,7 +28,7 @@ function App() {
     }, []);
 
     // 특정 경로에서는 전체 화면을 차지하도록 설정
-    const isFullPage = ["/login", "/register", "/user", "/edit"].includes(location.pathname);
+    const isFullPage = ["/login", "/register", "/user", "/edit" ,"/myBlog"].includes(location.pathname);
 
     return (
         <div className="App">
@@ -40,6 +40,7 @@ function App() {
                     <Route path="/register" element={<RegisterForm />} />
                     <Route path="/user" element={<MyPage />} />
                     <Route path="/edit" element={<QuillEditor />} />
+                    <Route path="/myBlog" element={<BlogAll/>} />
                 </Routes>
             </div>
 

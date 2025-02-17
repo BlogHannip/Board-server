@@ -62,13 +62,15 @@ public class LoginService {
                 String accessToken = jwtTokenProvider.createAccessToken(user.getEmail());
                 String refreshToken = jwtTokenProvider.createRefreshToken(user.getEmail());
 
+                long exp = jwtTokenProvider.getExpirationTimeFromToken(accessToken);
+
                 // JWT 토큰 생성
-                return new LoginResponseDto(accessToken,refreshToken,"로그인성공",user.getEmail());
+                return new LoginResponseDto(accessToken,refreshToken,"로그인성공",user.getEmail(),exp);
             } else {
-                return new LoginResponseDto(null,null,"로그인실패:비밀번호가 틀림",null);
+                return new LoginResponseDto(null,null,"로그인실패:비밀번호가 틀림",null,0);
             }
         } else {
-            return new LoginResponseDto(null,null,"로그인실패: 이메일을 찾을수없음",null);
+            return new LoginResponseDto(null,null,"로그인실패: 이메일을 찾을수없음",null,0);
         }
     }
 }

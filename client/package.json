@@ -17,6 +17,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "concurrently": "^9.1.2",
+    "dlx": "^0.2.1",
     "http-proxy-middleware": "^3.0.3",
     "jquery": "^3.7.1",
     "mdb-react-ui-kit": "^9.0.0",
@@ -40,8 +41,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^4.0.3",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.6",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5"

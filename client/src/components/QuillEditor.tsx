@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {useNavigate} from "react-router-dom";
 
 export default function QuillEditor() {
     const [title,setTitle] =useState("");
     const [content, setContent] = useState("");
+    const navigate = useNavigate();
 
     const handleSave = async () => {
         if(!title.trim() || !content.trim()){
@@ -25,6 +27,7 @@ export default function QuillEditor() {
                 alert("게시글이 저장되었습니다.");
                 setTitle("");
                 setContent("");
+                navigate("/main");
             } else {
                 alert("게시글 저장실패");
             }

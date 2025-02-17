@@ -1,5 +1,6 @@
 package com.example.board.service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,19 @@ public class JwtTokenService {
             return expiation.before(new Date());
         } catch (Exception e ){
             return true;
+        }
+    }
+
+    public long getExpirationTimeFromToken(String token){
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.getExpiration().getTime() / 1000; //초단위 변환
+        } catch (Exception e){
+            return 0;
         }
     }
 }

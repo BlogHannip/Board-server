@@ -1,5 +1,6 @@
 package com.example.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -50,25 +51,25 @@ public class BlogPost {
     @Column(nullable = false)
     private String title;
 
-    @Lob //실제로는 문자열인데 숫자 id로 저장
     @Column(columnDefinition = "TEXT",name = "content", nullable = false)
     private String content;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createAt; //처음 작성된 시각
+    @Column(nullable = false, updatable = false , columnDefinition = "TIMESTAMP")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt; //처음 작성된 시각
 
     @Column(nullable = false)
-    private LocalDateTime updateAt; //수정된 시작
+    private LocalDateTime updatedAt; //수정된 시작
 
     @PrePersist
     public void onCreate(){
-        this.createAt = LocalDateTime.now();
-        this.updateAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
     public void onUpdate(){
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
     //사용자와 연관관계

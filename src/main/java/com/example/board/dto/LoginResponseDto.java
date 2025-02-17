@@ -23,6 +23,12 @@ public class LoginResponseDto {
 
     private String message;
 
+    public long getExp() {
+        return exp;
+    }
+
+    private long exp; // 만료시간 추가 17일
+
     public String getEmail() {
         return email;
     }
@@ -33,11 +39,12 @@ public class LoginResponseDto {
 
     private String email;
 
-    public LoginResponseDto(String accessToken,String refreshToken, String message,String email){
+    public LoginResponseDto(String accessToken,String refreshToken, String message,String email,long exp){
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.message = message;
         this.email = email;
+        this.exp = exp;
     }
 
 

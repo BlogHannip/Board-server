@@ -43,7 +43,8 @@ public class AuthenticationController {
         if (accessToken != null) {
             if (!jwtTokenService.isTokenExpired(accessToken)) {
                 String email = jwtTokenService.getEmailFromToken(accessToken);
-                return ResponseEntity.ok(new LoginResponseDto(accessToken, refreshToken, "로그인유지됨",email));
+                long exp = jwtTokenService.getExpirationTimeFromToken(accessToken);
+                return ResponseEntity.ok(new LoginResponseDto(accessToken, refreshToken, "로그인유지됨",email,exp));
             }
         }
 
@@ -51,13 +52,14 @@ public class AuthenticationController {
             if (!jwtTokenService.isTokenExpired(refreshToken)) {
                 String email = jwtTokenService.getEmailFromToken(refreshToken);
                 String newAccessToken = jwtTokenService.createAccessToken(email);
+                long exp = jwtTokenService.getExpirationTimeFromToken(newAccessToken);
 
                 return ResponseEntity.ok()
                         .header("Set-Cookie", "accessToken:" + newAccessToken + "; HttpOnly: Path=/; Max-Age=1800")
-                        .body(new LoginResponseDto(accessToken,refreshToken,"토큰재발급",email));
+                        .body(new LoginResponseDto(accessToken,refreshToken,"토큰재발급",email,exp));
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null ,0));
     }
 
     private String getCookieValue(HttpServletRequest request, String cookieName){
