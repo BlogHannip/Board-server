@@ -32,7 +32,7 @@ function App() {
 
     return (
         <div className="App">
-            {!isFullPage && <Header />} {/* 특정 경로가 아닐 때만 Header 표시 */}
+              <Header /> {/* 특정 경로가 아닐 때만 Header 표시 */}
 
             <div className={`container my-5 ${isFullPage ? "full-page" : ""}`}>
                 <Routes>
@@ -61,10 +61,9 @@ function App() {
 
             {!isFullPage && (
                 <div>
-                    <Footer />
-                    <Background />
                 </div>
             )}
+            <Footer />
         </div>
     );
 }

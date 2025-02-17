@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import ApiClient from "../apiClient.tsx";
 import apiClient from "../apiClient.tsx";
+import {Card, Col, Container, Row} from "react-bootstrap";
 
 interface AllBlogs {
     id:number;
@@ -25,18 +25,27 @@ const BlogAll : React.FC = () => {
     }, []);
 
     return (
-         <div>
-             <h2>전체 블로그 목록</h2>
-             <ul>
-                 {blogs.map((blog) => (
-                     <li key = {blog.id}>
-                         <h3>{blog.title}</h3>
-                         <p dangerouslySetInnerHTML={{__html:blog.content}}/>
-                         <span>{new Date (blog.createdAt).toLocaleDateString()}</span>
-                     </li>
-                 ))}
-             </ul>
-         </div>
+        <Container className="mt-5">
+            <h2></h2>
+            <Row>
+                {blogs.map((blog) => (
+                    <Col key={blog.id} md={4} className="mb-4">
+                        <Card className="shadow-sm h-100">
+                            <Card.Body>
+                                <Card.Title>{blog.title}</Card.Title>
+                                <Card.Text dangerouslySetInnerHTML={{__html:blog.content}} />
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">
+                                    {new Date(blog.createdAt).toLocaleDateString()}
+                                </small>
+                            </Card.Footer>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </Container>
+
     )
 }
 
