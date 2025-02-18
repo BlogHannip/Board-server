@@ -149,17 +149,17 @@ h3 {
 /* 전체 컨테이너 설정 */
 .main-content-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start; /* 상단에 정렬 */
-    gap: 30px; /* MainMa와 Weather 사이의 간격 */
     margin-bottom: 30px;
 }
 
 /* MainMa: 가운데 정렬 */
 .main-content {
     flex: 1;
-    max-width: 70%; /* MainMa의 최대 너비 제한 */
-    z-index: 1; /* MainMa가 기본적으로 위에 오도록 설정 */
+    max-width: 75%;
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    z-index: 1;
 }
 
 /* Weather: 왼쪽 사이드로 고정 */
@@ -251,5 +251,19 @@ h3 {
 .custom-card:hover {
     transform: scale(1.005); /*1.05 배확대 */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.card:hover {
+    transform: translateY(-10px); /* 마우스 호버시 카드가 살짝 올라가는 효과 */
+}
+
+/* 이미지 스타일 */
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 

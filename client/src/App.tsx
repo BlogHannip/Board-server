@@ -51,9 +51,9 @@ function App() {
                         <MainMa />
                     </div>
 
-                    <div className="weather-content">
-                        <Weather />
-                    </div>
+                    {/*<div className="weather-content">*/}
+                    {/*    <Weather />*/}
+                    {/*</div>*/}
                 </div>
             )}
 
