@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {login} from "../store/authSlice.tsx";
+import {checkLogin, login} from "../store/authSlice.tsx";
 import apiClient from '../apiClient.tsx';
 import {
     MDBBtn,
@@ -44,7 +44,7 @@ const LoginForm = () => {
             localStorage.setItem('email',userEmail);
 
             //Redux 상태 업데이트
-            dispatch(login({email: userEmail}));
+            dispatch(checkLogin());
 
             alert("로그인이 성공했습니다!");
             navigate('/main');

@@ -219,5 +219,23 @@ h3 {
     margin: 5px auto; /* 가운데 정렬 */
 }
 
+/*02-17 */
+
+.custom-h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #456d78;
+    margin-bottom: 30px;
+}
+
+.custom-card {
+    transition: transform 0.3s ease-in-out,box-shadow 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+    transform : scale(1.005); /*1.05 배확대 */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
 
 /* 추가적인 스타일을 여기서 설정 가능합니다 */

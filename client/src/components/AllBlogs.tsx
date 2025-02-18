@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import apiClient from "../apiClient.tsx";
 import {Card, Col, Container, Row} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 interface AllBlogs {
     id:number;
@@ -11,6 +12,7 @@ interface AllBlogs {
 
 const BlogAll : React.FC = () => {
     const [blogs,setBlogs] =useState<AllBlogs[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
          apiClient
@@ -25,12 +27,13 @@ const BlogAll : React.FC = () => {
     }, []);
 
     return (
+        <div>
+            <h2 className="custom-h2">My-Blogs</h2>
         <Container className="mt-5">
-            <h2></h2>
             <Row>
                 {blogs.map((blog) => (
                     <Col key={blog.id} md={4} className="mb-4">
-                        <Card className="shadow-sm h-100">
+                        <Card className="custom-card" onClick={() => navigate(`/blog/${blog.id}`)} style={{cursor:"pointer"}}>
                             <Card.Body>
                                 <Card.Title>{blog.title}</Card.Title>
                                 <Card.Text dangerouslySetInnerHTML={{__html:blog.content}} />
@@ -45,7 +48,7 @@ const BlogAll : React.FC = () => {
                 ))}
             </Row>
         </Container>
-
+        </div>
     )
 }
 

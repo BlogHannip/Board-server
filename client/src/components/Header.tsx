@@ -29,7 +29,7 @@ export default function Header() {
                 const minutes = Math.floor(remainingTime / 60);
                 const seconds = remainingTime % 60 ;
                 console.log(minutes);
-                setTimeLeft(`토큰 만료 시간까지 ${minutes}분 ${seconds} 초 남았습니다`);
+                setTimeLeft(`${minutes}:${seconds}`);
             }
         };
         updateTime(); //최초로 실행
@@ -81,7 +81,8 @@ export default function Header() {
                         </>
                     ) : (
                         <>
-                            <span className="text-light mx-2">{user}님 환영합니다.{timeLeft}</span>
+                            <span className="text-light mx-2">{timeLeft}</span>
+                            <span className="text-light mx-2">{user}님 환영합니다.</span>
                             <Link to="/user" className="btn btn-success mx-2">My page</Link>
                             <span className="custom-hover-link" onClick={handleLogout}>로그아웃</span>
                         </>

@@ -20,7 +20,7 @@ const BlogList: React.FC = () => {
                     (a: BlogPost, b: BlogPost) =>
                         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
                 );
-                setBlogs(sortedBlogs.slice(0, 3));
+                setBlogs(sortedBlogs.slice(0,3));
             })
             .catch((err: any) => {
                 console.error("블로그 불러오기 실패", err);
