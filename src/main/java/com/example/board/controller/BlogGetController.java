@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,5 +36,15 @@ public class BlogGetController {
 
         List<BlogPost> blogPosts = searchBlogService.getBlogsByUser(email); //이메일에 따른 블로그 리스트 가져오기
         return ResponseEntity.ok(blogPosts);
+    }
+
+    @GetMapping("/blog/{id}")
+    public ResponseEntity<BlogPost> getBlogById(@PathVariable Long id){
+        BlogPost blogPost = searchBlogService.getBlogsById(id);
+
+        if(blogPost == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); //없으면 404
+        }
+        return ResponseEntity.ok(blogPost);
     }
 }
