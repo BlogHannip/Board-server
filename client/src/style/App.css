@@ -10,6 +10,7 @@
     text-align: center; /* 텍스트 정렬 */
 }
 
+
 .box {
     margin-bottom: 2rem;
     background: #ffffff;
@@ -69,47 +70,6 @@
     max-width: 1200px;
     margin: 0 auto;
 }
-
-.right-sidebar {
-    flex: 10;
-    max-width: 800px;
-    background-color: #f5f5f5;
-    padding: 0px;
-    border-radius: 15px;
-}
-
-/* 뉴스 카드 스타일 */
-.news {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center; /* 글자를 가운데 정렬 */
-}
-
-.news h3 {
-    font-size: 1.0em;
-    margin-bottom: 15px;
-}
-
-.news h4 {
-    margin-bottom: 30px;
-    font-size: 1.2em;
-}
-
-/* YouTube, Instagram, FunPhoto */
-.youtube-video, .instagram-post, .fun-photo {
-    width: 100%; /* 부모 요소의 너비에 맞게 설정 */
-    max-width: 800px; /* 최대 너비 설정 */
-    margin: 0 auto; /* 가운데 정렬 */
-}
-
-.news .youtube-video iframe {
-    width: 105%; /* iframe의 너비를 부모에 맞게 설정 */
-    height: 350px; /* 고정 높이 설정 */
-}
-
 /* 게시판 컨테이너 스타일 */
 .board-container {
     max-width: 800px; /* 게시판 전체 너비 */
@@ -154,13 +114,6 @@ h3 {
     margin-bottom: 30px;
 }
 
-/* MainMa: 가운데 정렬 */
-.main-content {
-    flex: 1;
-    max-width: 75%;
-    margin: 0 auto; /* 가로 중앙 정렬 */
-    z-index: 1;
-}
 
 /* Weather: 왼쪽 사이드로 고정 */
 .weather-content {
@@ -184,14 +137,6 @@ h3 {
 .full-page {
     width: 100%;
     padding: 0;
-}
-
-/* 추가적인 스타일 */
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px; /* 카드 사이의 간격 */
 }
 
 /* 모바일 대응: 모바일에서는 세로로 배치되게 */
@@ -222,48 +167,5 @@ h3 {
     .board-container {
         max-width: 100%; /* 게시판이 모바일에서 화면에 맞게 조정 */
     }
-}
-
-/* 전체 레이아웃 설정 */
-.container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* 카드 간 간격 */
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; /* 가운데 정렬 */
-}
-
-/*02-17 */
-
-.custom-h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #456d78;
-    margin-bottom: 30px;
-}
-
-.custom-card {
-    transition: transform 0.3s ease-in-out,box-shadow 0.3s ease-in-out;
-}
-
-.custom-card:hover {
-    transform: scale(1.005); /*1.05 배확대 */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-
-.card:hover {
-    transform: translateY(-10px); /* 마우스 호버시 카드가 살짝 올라가는 효과 */
-}
-
-/* 이미지 스타일 */
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
 }
 

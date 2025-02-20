@@ -54,7 +54,7 @@ const ProfileDropdown: React.FC = () => {
                 <h5>GitHub Profile</h5>
                 <img src={githubData?.avatar_url} className="img-fluid rounded-circle mx-auto"
                      alt="GitHub Avatar" style={{ width: "80px" }} />
-                <p className="mb-1">{githubData?.name}</p>
+                <p className="mb-1 text-white">{githubData?.name}</p>
                 <p className="text-muted">@{githubData?.login}</p>
                 <a href={githubData?.html_url} className="btn btn-primary btn-sm w-100" target="_blank" rel="noopener noreferrer">
                     방문
