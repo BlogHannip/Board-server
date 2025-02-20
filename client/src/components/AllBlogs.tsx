@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import apiClient from "../apiClient.tsx";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import "../style/common.css"
 
 interface AllBlogs {
     id:number;

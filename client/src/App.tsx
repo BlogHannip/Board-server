@@ -1,23 +1,23 @@
 import {matchPath, Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import './App.css';
+import './style/App.css';
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
 import LoginForm from "./pages/LoginForm.tsx";
 import RegisterForm from "./pages/RegisterForm.tsx";
 import MainMa from "./components/MainMain.tsx";
-import MyPage from "./components/MyPage.tsx";
+import MyPage from "./pages/MyPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-summernote/dist/react-summernote.css";
-import QuillEditor from "./components/QuillEditor.tsx";
+import QuillEditor from "./api/QuillEditor.tsx";
 import { useEffect } from "react";
 import { checkLogin } from "./store/authSlice.tsx";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store/store.tsx";
-import Weather from "./components/Weather.tsx";
-import BlogList from "./components/BlogList.tsx";
 import BlogAll from "./components/AllBlogs.tsx";
-import BlogDetail from "./components/BlogDetail.tsx";
-import EditBlog from "./components/EditBlog.tsx";
+import BlogDetail from "./pages/BlogDetail.tsx";
+import EditBlog from "./pages/EditBlog.tsx";
+import ShowWorking from "./components/ShowWorking.tsx";
+import Categoty from "./components/Categoty.tsx";
 
 function App() {
     const location = useLocation();
@@ -62,7 +62,17 @@ function App() {
                 </div>
             )}
 
-            {!isFullPage && <BlogList />} {/* 특정 경로가 아닐 때만 SectionFour 표시 */}
+            {!isFullPage && (
+                <div>
+                    <ShowWorking/>
+                </div>
+            )}
+            {!isFullPage && (
+                <div style={{marginTop:"20px"}}>
+                    <Categoty/>
+                </div>
+            )}
+
 
             {!isFullPage && (
                 <div>
