@@ -154,13 +154,36 @@ h3 {
     margin-bottom: 30px;
 }
 
-/* MainMa: 가운데 정렬 */
+/* MainMa를 포함하는 전체 컨테이너 */
+.main-content-container {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    padding-top: 0;
+}
+
+/* MainMa 위치 조정 */
 .main-content {
     flex: 1;
-    max-width: 75%;
-    margin: 0 auto; /* 가로 중앙 정렬 */
+    width: 100vw;
+    height: auto;
+    margin: 0;
+    padding: 0;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* 🔥 위치를 위로 올리기 */
+    position: relative;
+    top: -20px; /* 숫자를 조정하면서 원하는 높이 찾기 */
 }
+
+nav.navbar {
+    margin-bottom: 0; /* 헤더 하단 여백 제거 */
+}
+
 
 /* Weather: 왼쪽 사이드로 고정 */
 .weather-content {

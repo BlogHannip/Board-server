@@ -29,7 +29,7 @@ function App() {
     }, []);
 
     // 특정 경로에서는 전체 화면을 차지하도록 설정
-    const isFullPage = ["/login", "/register", "/user", "/edit/" ,"/myBlog"].includes(location.pathname)
+    const isFullPage = ["/login", "/register", "/user", "/edit" ,"/myBlog"].includes(location.pathname)
         || matchPath("/blog/:blogId", location.pathname) != null
         || matchPath("/edit/:blogId", location.pathname) !== null;
 
