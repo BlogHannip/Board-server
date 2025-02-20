@@ -15,7 +15,26 @@ const ShowWorking = () =>{
                     <Col className="p-3 shadow-sm">
                         <Card.Body>
                            <Card.Title>자기 개발</Card.Title>
+                            <Card.Img variant="top" className="custom-card-img" src="images/show3.png"></Card.Img>
                            <Card.Text>다양한 정보를 탐색하여 develop 하세요.</Card.Text>
+                        </Card.Body>
+                    </Col>
+                </Col>
+                <Col md = {4}>
+                    <Col className="p-3 shadow-sm">
+                        <Card.Body>
+                            <Card.Title>자기 개발</Card.Title>
+                            <Card.Img src="/images/show2.png" className="custom-card-img"></Card.Img>
+                            <Card.Text>다양한 정보를 탐색하여 develop 하세요.</Card.Text>
+                        </Card.Body>
+                    </Col>
+                </Col>
+                <Col md = {4}>
+                    <Col className="p-3 shadow-sm">
+                        <Card.Body>
+                            <Card.Title>자기 개발</Card.Title>
+                            <Card.Img src="/images/show1.png" className="custom-card-img"></Card.Img>
+                            <Card.Text>다양한 정보를 탐색하여 develop 하세요.</Card.Text>
                         </Card.Body>
                     </Col>
                 </Col>

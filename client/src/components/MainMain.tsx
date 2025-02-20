@@ -41,6 +41,10 @@ export default function MainMa() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
+
+            <div className="mt-3">
+                <Link to="/edit" className="btn btn-primary px-4 py-2">블로그 작성</Link>
+            </div>
         </div>
     );
 }

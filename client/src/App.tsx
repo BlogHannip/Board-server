@@ -17,6 +17,7 @@ import BlogAll from "./components/AllBlogs.tsx";
 import BlogDetail from "./pages/BlogDetail.tsx";
 import EditBlog from "./pages/EditBlog.tsx";
 import ShowWorking from "./components/ShowWorking.tsx";
+import Categoty from "./components/Categoty.tsx";
 
 function App() {
     const location = useLocation();
@@ -64,6 +65,11 @@ function App() {
             {!isFullPage && (
                 <div>
                     <ShowWorking/>
+                </div>
+            )}
+            {!isFullPage && (
+                <div style={{marginTop:"20px"}}>
+                    <Categoty/>
                 </div>
             )}
 
