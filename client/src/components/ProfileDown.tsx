@@ -48,15 +48,27 @@ const ProfileDropdown: React.FC = () => {
 
     return (
         <div className="dropdown-menu show position-absolute bg-dark text-white p-3 rounded shadow"
-             style={{ right: 0, top: "100%", minWidth: "250px", zIndex: 1000 }}>
-            {/* GitHub 프로필 */}
+             style={{right: 0, top: "100%", minWidth: "250px", zIndex: 1000}}>
+
             <div className="text-center mb-3">
                 <h5>GitHub Profile</h5>
                 <img src={githubData?.avatar_url} className="img-fluid rounded-circle mx-auto"
-                     alt="GitHub Avatar" style={{ width: "80px" }} />
+                     alt="GitHub Avatar" style={{width: "80px"}}/>
                 <p className="mb-1 text-white">{githubData?.name}</p>
                 <p className="text-muted">@{githubData?.login}</p>
-                <a href={githubData?.html_url} className="btn btn-primary btn-sm w-100" target="_blank" rel="noopener noreferrer">
+                <a href={githubData?.html_url} className="btn btn-primary btn-sm w-100" target="_blank"
+                   rel="noopener noreferrer">
+                    방문
+                </a>
+            </div>
+
+            <div className="text-center mb-3">
+                <h5>GitHub Profile</h5>
+                <img src="https://github.com/jeongraewon.png" className="img-fluid rounded-circle mx-auto"
+                     alt="Jeongraewon Avatar" style={{width: "80px"}}/>
+                <p className="text-muted">@jeongraewon</p>
+                <a href="https://github.com/jeongraewon" className="btn btn-primary btn-sm w-100" target="_blank"
+                   rel="noopener noreferrer">
                     방문
                 </a>
             </div>
@@ -65,7 +77,7 @@ const ProfileDropdown: React.FC = () => {
             <div className="text-center">
                 <h5>{weather.city} 날씨</h5>
                 <img src={`https://openweathermap.org/img/w/${weather.icon}.png`}
-                     alt="weather icon" className="mx-auto d-block" style={{ width: "50px" }} />
+                     alt="weather icon" className="mx-auto d-block" style={{width: "50px"}}/>
                 <p className="mb-0">{weather.temp.toFixed(1)}°C</p>
                 <small className="text-muted">{weather.desc}</small>
             </div>

@@ -150,8 +150,10 @@ h3 {
 .main-content-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* 상단에 정렬 */
+    align-items: flex-start; /* 상단 정렬 */
     margin-bottom: 30px;
+    position: relative; /* 위치를 상대적으로 조정 */
+    top: -100px; /* 위로 이동 */
 }
 
 /* MainMa를 포함하는 전체 컨테이너 */
@@ -160,7 +162,6 @@ h3 {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    padding-top: 0;
 }
 
 /* MainMa 위치 조정 */
@@ -174,10 +175,6 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-
-    /* 🔥 위치를 위로 올리기 */
-    position: relative;
-    top: -20px; /* 숫자를 조정하면서 원하는 높이 찾기 */
 }
 
 nav.navbar {

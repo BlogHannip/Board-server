@@ -8,7 +8,16 @@ export default function MainMa() {
     }, []);
 
     return (
-        <div style={{ width: "100vw", height: "auto", marginBottom: "20px", overflow: "hidden", padding: "0", margin: "0" }}>
+        <div style={{
+            width: "100vw",
+            height: "auto",
+            marginBottom: "20px",
+            overflow: "hidden",
+            padding: "0",
+            margin: "0",
+            position: "relative",
+            top: "0px"
+        }}>
             {/* Carousel */}
             <Carousel style={{ width: "100vw", margin: "0", padding: "0" }}>
                 <Carousel.Item>

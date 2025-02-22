@@ -55,10 +55,6 @@ function App() {
                     <div className="main-content">
                         <MainMa />
                     </div>
-
-                    {/*<div className="weather-content">*/}
-                    {/*    <Weather />*/}
-                    {/*</div>*/}
                 </div>
             )}
 
