@@ -3,6 +3,7 @@ package com.example.board.service;
 import com.example.board.dto.UserDto;
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class  UserService {
         if(userDto.getEmail().isEmpty()){
             throw new IllegalArgumentException("email is null");
         }
+
         logger.debug("UserDto 정보: {}", userDto);
           String encoded = passwordEncdoer.encode(userDto.getPassword());
 
