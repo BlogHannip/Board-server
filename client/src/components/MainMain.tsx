@@ -16,7 +16,7 @@ export default function MainMa() {
             padding: "0",
             margin: "0",
             position: "relative",
-            top: "0px"
+            top: "-45px"
         }}>
             {/* Carousel */}
             <Carousel style={{ width: "100vw", margin: "0", padding: "0" }}>

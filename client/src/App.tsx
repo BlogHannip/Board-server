@@ -18,6 +18,7 @@ import BlogDetail from "./pages/BlogDetail.tsx";
 import EditBlog from "./pages/EditBlog.tsx";
 import ShowWorking from "./components/ShowWorking.tsx";
 import Categoty from "./components/Categoty.tsx";
+import SearchBar from "./components/SearchBar.tsx";
 
 function App() {
     const location = useLocation();
@@ -35,20 +36,24 @@ function App() {
 
     return (
         <div className="App">
-             <Header /> {/* 특정 경로가 아닐 때만 Header 표시 */}
+            <Header/> {/* 특정 경로가 아닐 때만 Header 표시 */}
 
             <div className={`container my-5 ${isFullPage ? "full-page" : ""}`}>
                 <Routes>
-                    <Route path="/login" element={<LoginForm />} />
-                    <Route path="/register" element={<RegisterForm />} />
-                    <Route path="/user" element={<MyPage />} />
-                    <Route path="/edit" element={<QuillEditor />} />
-                    <Route path="/myBlog" element={<BlogAll/>} />
-                    <Route path="/blog/:blogId" element={<BlogDetail/>} />
-                    <Route path="/edit/:blogId" element={<EditBlog/>} />
+                    <Route path="/login" element={<LoginForm/>}/>
+                    <Route path="/register" element={<RegisterForm/>}/>
+                    <Route path="/user" element={<MyPage/>}/>
+                    <Route path="/edit" element={<QuillEditor/>}/>
+                    <Route path="/myBlog" element={<BlogAll/>}/>
+                    <Route path="/blog/:blogId" element={<BlogDetail/>}/>
+                    <Route path="/edit/:blogId" element={<EditBlog/>}/>
                 </Routes>
             </div>
-
+            {!isFullPage && (
+            <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+                <SearchBar/> {/* 검색바 추가 */}
+            </div>
+            )}
             {!isFullPage && (
                 <div className="main-content-container">
                     {/* MainMa: 가운데 정렬 */}
@@ -64,7 +69,7 @@ function App() {
                 </div>
             )}
             {!isFullPage && (
-                <div style={{marginTop:"20px"}}>
+                <div style={{marginTop: "20px"}}>
                     <Categoty/>
                 </div>
             )}
@@ -74,7 +79,7 @@ function App() {
                 <div>
                 </div>
             )}
-            <Footer />
+            <Footer/>
         </div>
     );
 }

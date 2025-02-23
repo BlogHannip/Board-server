@@ -21,6 +21,7 @@
     "dlx": "^0.2.1",
     "http-proxy-middleware": "^3.0.3",
     "jquery": "^3.7.1",
+    "lucide-react": "^0.475.0",
     "mdb-react-ui-kit": "^9.0.0",
     "popper.js": "^1.16.1",
     "react": "^18.3.1",
