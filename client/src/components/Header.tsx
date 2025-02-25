@@ -77,7 +77,8 @@ export default function Header() {
                             <span className="text-light mx-2">{timeLeft}</span>
                             <span className="text-light mx-2">{user}님 환영합니다.</span>
                             <Link to="/user" className="btn btn-success mx-2">My page</Link>
-                            <span className="custom-hover-link text-white mx-2" onClick={handleLogout}>로그아웃</span>
+                            <span className="custom-hover-link text-white mx-2" onClick={handleLogout}
+                            style={{cursor:"pointer"}}>로그아웃</span>
 
                             {/* 프로필 드롭다운 */}
                             <div
@@ -85,7 +86,8 @@ export default function Header() {
                                 onMouseEnter={() => setIsProfileOpen(true)}
                                 onMouseLeave={() => setIsProfileOpen(false)}
                             >
-                                <span className="custom-hover-link text-white">프로필</span>
+                                <span className="custom-hover-link text-white"
+                                style={{cursor:"pointer"}}>프로필</span>
                                 {isProfileOpen && <ProfileDropdown />}
                             </div>
                         </>

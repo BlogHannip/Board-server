@@ -16,9 +16,6 @@
 }
 
 
-.card:hover {
-    transform: translateY(-10px); /* 마우스 호버시 카드가 살짝 올라가는 효과 */
-}
 
 /* 이미지 스타일 */
 .custom-card-img {

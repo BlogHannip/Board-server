@@ -12,6 +12,10 @@ interface Blog {
     user: {
         name: string;
     };
+    category:{
+        id:string;
+        name:string;
+    }
 }
 
 const BlogDetail :React.FC = () =>{
@@ -56,6 +60,7 @@ const BlogDetail :React.FC = () =>{
         <Container className="mt-4">
             <div className="blog-detail-container">
                 <h1 className="blog-title">{blog.title}</h1>
+                <p className="text-black">{blog.category.name}</p>
                 <div className="blog-meta">
                     <span className="author">{blog.user.name}</span>
                     <span className="date">{new Date(blog.createdAt).toLocaleDateString()}</span>

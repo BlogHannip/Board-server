@@ -59,7 +59,7 @@ const LoginForm = () => {
     };
 
     return (
-        <MDBContainer fluid>
+        <MDBContainer className="">
             <MDBRow className="d-flex justify-content-center align-items-center h-100">
                 <MDBCol col="12">
                     <MDBCard className="bg-white my-5 mx-auto" style={{ borderRadius: '1rem', maxWidth: '500px' }}>
@@ -92,21 +92,21 @@ const LoginForm = () => {
                                     name="flexCheck"
                                     id="flexCheckDefault"
                                     className="mb-4"
-                                    label="비밀번호 기억하기"
+                                    label="아이디 기억하기"
                                 />
-                                <MDBBtn size="lg" type="submit"
+                                <button size="lg" type="submit" className="btn btn-primary"
                                 style={{width:'400px',}}>
                                     Login
-                                </MDBBtn>
+                                </button>
+                                <button
+                                    onClick={handleRegisterClick}
+                                    style={{width:"400px", marginTop:"5px"}}
+                                    className="btn btn-primary"
+                                >
+                                    회원가입
+                                </button>
                             </form>
 
-                            <MDBBtn
-                                size="lg"
-                                onClick={handleRegisterClick}
-                                style={{ padding: '5px', margin: '10px', transition: 'none', transform: 'none' }}
-                            >
-                                회원가입
-                            </MDBBtn>
 
                             <hr className="my-4" />
 
