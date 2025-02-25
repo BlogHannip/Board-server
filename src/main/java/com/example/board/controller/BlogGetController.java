@@ -39,12 +39,14 @@ public class BlogGetController {
     }
 
     @GetMapping("/blog/{id}")
-    public ResponseEntity<BlogPost> getBlogById(@PathVariable Long id){
+    public ResponseEntity<?> getBlogById(@PathVariable Long id){
         BlogPost blogPost = searchBlogService.getBlogsById(id);
 
         if(blogPost == null){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); //없으면 404
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("블로그 게시글을 찾을수 없습니다."); //없으면 404
         }
         return ResponseEntity.ok(blogPost);
     }
+
+
 }

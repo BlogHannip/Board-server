@@ -1,7 +1,7 @@
 import {Card, Col, Container, Row} from "react-bootstrap";
 
 
-const categories = [
+export const categories = [
     {title:"음식" ,image:"/images/food.png"},
     {title:"여행" ,image:"/images/trip.png"},
     {title:"인테리어" ,image:"/images/interior.png"},

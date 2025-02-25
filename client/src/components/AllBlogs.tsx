@@ -9,6 +9,10 @@ interface AllBlogs {
     title: string;
     content : string;
     createdAt : string;
+    category: {
+        id:number;
+        name:string; //02-25 추가
+    }
 }
 
 const BlogAll : React.FC = () => {

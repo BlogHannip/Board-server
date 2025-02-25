@@ -41,9 +41,14 @@ public class BlogPostController {
 
         CustomUserDetails userDetails = (CustomUserDetails) principal;
         String email = userDetails.getUsername();
+        String category = blogDto.getCategory(); // 카테고리ID 가져오기
+
+        if(category == null){
+            return ResponseEntity.status(400).body("카테고리 ID 가없습니다");
+        }
 
         System.out.println("현재 로그인한 사용자:"+ email);
-        BlogPost savePost = blogService.savePost(blogDto.getTitle(),blogDto.getContent(),email);
+        BlogPost savePost = blogService.savePost(blogDto.getTitle(),blogDto.getContent(),email , category);
         return ResponseEntity.ok(savePost);
 
     }

@@ -23,18 +23,18 @@ const ShowWorking = () =>{
                 <Col md = {4}>
                     <Col className="p-3 shadow-sm">
                         <Card.Body>
-                            <Card.Title>자기 개발</Card.Title>
+                            <Card.Title>나의 다이어리</Card.Title>
                             <Card.Img src="/images/show2.png" className="custom-card-img"></Card.Img>
-                            <Card.Text>다양한 정보를 탐색하여 develop 하세요.</Card.Text>
+                            <Card.Text>당신의 멋진 기록하는 일상</Card.Text>
                         </Card.Body>
                     </Col>
                 </Col>
                 <Col md = {4}>
                     <Col className="p-3 shadow-sm">
                         <Card.Body>
-                            <Card.Title>자기 개발</Card.Title>
+                            <Card.Title>커뮤니케이션</Card.Title>
                             <Card.Img src="/images/show1.png" className="custom-card-img"></Card.Img>
-                            <Card.Text>다양한 정보를 탐색하여 develop 하세요.</Card.Text>
+                            <Card.Text>많은 사람들과 정보를 나눠보세요.</Card.Text>
                         </Card.Body>
                     </Col>
                 </Col>
