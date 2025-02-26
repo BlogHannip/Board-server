@@ -8,7 +8,7 @@ export const categories = [
     {title:"건강" ,image:"/images/health.png"},
     {title:"문화생활" ,image:"/images/read.png"},
     {title:"자기개발" ,image:"/images/self.png"},
-    {title:"IT/기술" ,image:"/images/IT.png"},
+    {title:"IT" ,image:"/images/IT.png"},
     {title:"일상" ,image:"/images/day.png"},
 ]
 const Categoty = () =>{

@@ -37,10 +37,14 @@ public class BlogService {
         return blogRepository.save(post);
     }
 
-    public void incrementViewCount(Long postId) {
+    @Transactional
+    public void getBlogById(Long postId) {
         BlogPost post = blogRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않습니다"));
+
+        System.out.println("조회수 증가 실행전:"+ post.getViewCount());
         post.setViewCount(post.getViewCount() + 1);
-        blogRepository.save(post);
+
+        System.out.println("증가된 조회수:" +post.getViewCount());
     }
 }

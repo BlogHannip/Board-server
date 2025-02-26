@@ -2,12 +2,16 @@ import { useState } from "react";
 import Input from "./UI/Input.tsx";
 import { Button } from "react-bootstrap";
 import { Search } from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 export default function SearchBar() {
     const [query, setQuery] = useState("");
+    const navigate = useNavigate();
 
     const handleSearch = () => {
-        alert(`Searching for: ${query}`);
+        if(query.trim()){
+            navigate(`/search?keyword=${query}`);
+        }
     };
 
     return (

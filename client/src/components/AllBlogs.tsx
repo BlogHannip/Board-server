@@ -39,9 +39,11 @@ const BlogAll : React.FC = () => {
                 {blogs.map((blog) => (
                     <Col key={blog.id} md={4} className="mb-4">
                         <Card className="custom-card" onClick={() => navigate(`/blog/${blog.id}`)} style={{cursor:"pointer"}}>
+                            <Card.Header>
+                                {blog.category.name}
+                            </Card.Header>
                             <Card.Body>
                                 <Card.Title>{blog.title}</Card.Title>
-                                <p className="text-black">{blog.category.name}</p>
                                 <Card.Text dangerouslySetInnerHTML={{__html:blog.content}} />
                             </Card.Body>
                             <Card.Footer>
