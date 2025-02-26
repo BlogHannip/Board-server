@@ -4,7 +4,9 @@ import com.example.board.entity.BlogPost;
 import com.example.board.repository.BlogRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +20,9 @@ public class SearchBlogService {
         this.blogRepository =blogRepository;
     }
 
-    public List<BlogPost> getBlogsByUser(String email) {
-        return blogRepository.findByUser_Email(email);
+    @Transactional(readOnly = true) //1차 캐시 활성화 되서 여러번 조회해도 DB 조회 X
+    public Page<BlogPost> getBlogsByUser(String email ,Pageable pageable) {
+        return blogRepository.findByUser_Email(email ,pageable);
     }
 
     public BlogPost getBlogsById(Long id){

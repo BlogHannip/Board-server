@@ -5,10 +5,14 @@ import com.example.board.entity.BlogPost;
 import com.example.board.service.BlogService;
 import com.example.board.service.SearchBlogService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,7 +32,9 @@ public class BlogGetController {
 
     //특정 블로그 리스트 가져오기 (사용자 따라)
     @GetMapping("/my-blogs")
-    public ResponseEntity<List<BlogPost>> getMyBlogs (Authentication authentication){
+    public ResponseEntity<Page<BlogPost>> getMyBlogs (Authentication authentication,
+                                                   @PageableDefault(size = 10, sort = "createdAt") Pageable pageable
+                                                      ){
         if(authentication  == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -36,7 +42,7 @@ public class BlogGetController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
 
-        List<BlogPost> blogPosts = searchBlogService.getBlogsByUser(email); //이메일에 따른 블로그 리스트 가져오기
+        Page<BlogPost> blogPosts = searchBlogService.getBlogsByUser(email ,pageable);//이메일에 따른 블로그 리스트 가져오기
         return ResponseEntity.ok(blogPosts);
     }
 

@@ -21,4 +21,6 @@ public interface BlogRepository extends JpaRepository<BlogPost, Long> {
     Page<BlogPost> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(
             String title, String content , Pageable pageable
     );
+
+    Page<BlogPost> findByUser_Email(String st, Pageable pageable);
 }
