@@ -32,7 +32,7 @@ public class SearchBlogService {
 
     public Page<BlogPost> searchBlogs(String keyword , Pageable pageable) {
         System.out.println("검색요청: keyword=" +keyword);
-        Page<BlogPost> results = blogRepository.findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(keyword,keyword,pageable);
+        Page<BlogPost> results = blogRepository.searchByKeyWord(keyword,pageable);
         System.out.println("검색 결과 개수:" + results.getTotalElements()); //로그 추가
         return results;
     }

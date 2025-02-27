@@ -2,6 +2,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import apiClient from "../apiClient.tsx";
 import {Container, Button} from "react-bootstrap";
+import {useSelector} from "react-redux";
+import {RootState} from "../store/store.tsx";
 
 interface Blog {
     id: number;
@@ -11,6 +13,7 @@ interface Blog {
     viewCount: number;
     user: {
         name: string;
+        email:string;
     };
     category:{
         id:string;
@@ -22,6 +25,8 @@ const BlogDetail :React.FC = () =>{
     const {blogId} = useParams();
     console.log("blogId:" ,blogId);
     const navigate = useNavigate();
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+    const userEmail = useSelector((state:RootState) => state.auth.email);
     const [blog, setBlog] = useState<Blog | null>(null);
 
     useEffect(() => {
@@ -70,12 +75,16 @@ const BlogDetail :React.FC = () =>{
                     <p dangerouslySetInnerHTML={{ __html: blog.content }} />
                 </div>
                 <div className="blog-actions">
-                    <Button variant="warning" onClick={handleEdit}>
-                        수정하기
-                    </Button>
-                    <Button variant="danger" className="ms-2" onClick={handleDelete}>
-                        삭제하기
-                    </Button>
+                    {isAuthenticated && blog.user.email == userEmail && ( //로그인상태 + 본인글만.
+                        <>
+                            <Button variant="warning" onClick={handleEdit}>
+                                수정하기
+                            </Button>
+                            <Button variant="danger" className="ms-2" onClick={handleDelete}>
+                                삭제하기
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
         </Container>

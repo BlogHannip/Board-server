@@ -42,8 +42,12 @@ public class BlogService {
         BlogPost post = blogRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않습니다"));
 
+
         System.out.println("조회수 증가 실행전:"+ post.getViewCount());
         post.setViewCount(post.getViewCount() + 1);
+        //변경 감지(dirty checking) -> 트랜잭션(데이터베이스 작업 단위)가 끝나면 자동으로 update
+
+        //blogRepository.save(post)를 하지않아도,트랜잭션이 종료될경우 변경사항이 DB에 반영 / flush()
 
         System.out.println("증가된 조회수:" +post.getViewCount());
     }

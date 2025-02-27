@@ -1,4 +1,5 @@
 import {Card, Col, Container, Row} from "react-bootstrap";
+import {useNavigate} from "react-router-dom";
 
 
 export const categories = [
@@ -12,6 +13,11 @@ export const categories = [
     {title:"일상" ,image:"/images/day.png"},
 ]
 const Categoty = () =>{
+    const navigate = useNavigate();
+
+    const handleCategoryClick = (category:string) =>{
+        navigate(`/category/${category}`); //선택한 카테고리
+    }
 
 
     return (
@@ -20,7 +26,8 @@ const Categoty = () =>{
             <Row className="custom-row">
                 {categories.map((category, index) => (
                     <Col key={index} lg={Math.floor(12/categories.length)}  className="p-1">
-                        <Card className="custom-card1 text-center" style={{height:'130px',width:'110px'}}>
+                        <Card className="custom-card1 text-center" style={{height:'130px',width:'110px'}}
+                        onClick={() => handleCategoryClick(category.title)}>
                             <Card.Img variant="top" className="custom-card-img1" src={category.image}
                             style={{marginTop:"5px"}}/>
                             <Card.Body>
