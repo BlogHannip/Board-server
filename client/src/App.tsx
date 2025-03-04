@@ -34,8 +34,7 @@ function App() {
     // 특정 경로에서는 전체 화면을 차지하도록 설정
     const isFullPage = ["/login", "/register", "/user", "/edit" ,"/myBlog","/search"].includes(location.pathname)
         || matchPath("/blog/:blogId", location.pathname) !== null
-        || matchPath("/edit/:blogId", location.pathname) !==null
-        || matchPath("/category/:category", location.pathname) !==null;
+        || matchPath("/edit/:blogId", location.pathname) !==null;
 
     return (
         <div className="App">
@@ -51,7 +50,6 @@ function App() {
                     <Route path="/blog/:blogId" element={<BlogDetail/>}/>
                     <Route path="/edit/:blogId" element={<EditBlog/>}/>
                     <Route path="/search" element={<SearchResults/>}/>
-                    <Route path="/category/:category" element={<CategoryBLogs/>} />
                 </Routes>
             </div>
             {!isFullPage && (

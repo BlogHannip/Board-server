@@ -40,4 +40,8 @@ public class SearchBlogService {
     public Page<BlogPost> getAllBlogs(Pageable pageable){
         return blogRepository.findAll(pageable);
     }
+
+    public Page<BlogPost> getBlogsByCategory_Name(String category , Pageable pageable){
+        return blogRepository.findByCategory_Name(category,pageable);
+    }
 }

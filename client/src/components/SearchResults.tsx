@@ -18,15 +18,26 @@ const SearchResults : React.FC = () =>{
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const navigate = useNavigate();
+
+
     const keyword = params.get("keyword") || "" ;
+    const category = params.get("category") || "" ;
+
     const [page,setPage] =useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
     const [blogs,setBlogs] = useState<Blog[]>([]);
 
     useEffect(() => {
+        let apiUrl = "";
         if(keyword) {
-            apiClient.get(`/search?keyword=${keyword}&page=${page}&size=12`)
+            apiUrl = `/search?keyword=${keyword}&page=${page}&size=12`;
+        } else if(category){
+            apiUrl = `/search?category=${category}&page=${page}&size=12`;
+        }
+
+
+        if(apiUrl) {
+            apiClient.get(apiUrl)
                 .then(response =>{
                     console.log(response.data);
                     setBlogs(response.data.content);
@@ -36,16 +47,22 @@ const SearchResults : React.FC = () =>{
                     console.error("검색 실패", error);
                 });
         }
-    }, [keyword,page]);
+    }, [keyword,category,page]);
 
     return(
         <Container className="mt-4">
-            <h2>검색결과:"{keyword}"</h2>
+            {/* 검색 결과 OR 카테고리 결과 제목 설정*/}
+            <h2>{keyword
+                ? `검색결과: "${keyword}"`
+                : `카테고리:"${category}"`}
+            </h2>
             <div className="pagination" style={{marginBottom:"10px"}}>
                 <Button disabled={page === 0} onClick={() => setPage(page - 1)} style={{marginRight:"5px"}}>
                     이전
                 </Button>
-                <span> {page + 1} / {totalPages} </span>
+                <span>
+                    {" "}
+                    {page + 1} / {totalPages} </span>
                 <Button disabled={page + 1 >= totalPages} onClick={() => setPage(page + 1)} style={{marginLeft:"5px"}}>
                     다음
                 </Button>

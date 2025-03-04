@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import apiClient from "../apiClient.tsx";
 import BlogAll from "./AllBlogs.tsx";
+import SearchResults from "./SearchResults.tsx";
 
 
 const CategoryBLogs = () =>{
@@ -21,7 +22,7 @@ const CategoryBLogs = () =>{
     return(
         <div>
             <h2>{category} 관련 블로그</h2>
-            <BlogAll blogs={blogs} />
+            <SearchResults blogs={blogs} />
         </div>
     );
 };

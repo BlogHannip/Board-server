@@ -68,11 +68,24 @@ public class BlogGetController {
     }
 
     @GetMapping("/search") ///api/search?keyword=검색어&page=0&size=10
-    public ResponseEntity<Page<BlogPost>> searchBlogs(@RequestParam String keyword, Pageable pageable){
+    public ResponseEntity<Page<BlogPost>> searchBlogs(@RequestParam(required = false) String keyword
+            ,@RequestParam(required = false) String category, Pageable pageable){
         System.out.println("검색 API 호출됨:" + keyword);
-        Page<BlogPost> blogs = searchBlogService.searchBlogs(keyword,pageable);
-        return ResponseEntity.ok(blogs);
+
+        Page<BlogPost> posts;
+
+        if(category != null && !category.isEmpty()){
+            posts = searchBlogService.getBlogsByCategory_Name(category,pageable);
+        } else if (keyword != null && !keyword.isEmpty()){
+            posts = searchBlogService.searchBlogs(keyword, pageable);
+        } else {
+            posts =Page.empty();
+        }
+
+        return ResponseEntity.ok(posts);
+
     }
+
 
 
 }
