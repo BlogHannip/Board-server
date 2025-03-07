@@ -29,7 +29,7 @@ public class BlogPostController {
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody BlogDto blogDto ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("contorller 에서 인증객체 SecuriyContextHolder:" + authentication);
+        System.out.println("controller 에서 인증객체 SecurityContextHolder:" + authentication);
 
         if(authentication == null || !authentication.isAuthenticated()){
             return ResponseEntity.status(401).body("로그인이 안되어있음");

@@ -32,9 +32,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    @Lob
-    private String content;
-
     @Column(nullable = false)
     private String role = "ROLE_USER"; // 기본값 유저 권한
 

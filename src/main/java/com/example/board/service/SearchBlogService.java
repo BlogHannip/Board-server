@@ -26,7 +26,7 @@ public class SearchBlogService {
     }
 
     public BlogPost getBlogsById(Long id){
-        Optional<BlogPost> blogPost = blogRepository.findById(id);
+        Optional<BlogPost> blogPost = blogRepository.findByIdWithCategory(id);
         return blogPost.orElse(null);
     }
 

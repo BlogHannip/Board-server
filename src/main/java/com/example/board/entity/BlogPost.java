@@ -1,6 +1,7 @@
 package com.example.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -8,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -51,12 +54,15 @@ public class BlogPost {
     @Column(columnDefinition = "TEXT",name = "content", nullable = false)
     private String content;
 
+
     @Column(nullable = false, updatable = false , columnDefinition = "TIMESTAMP")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt; //처음 작성된 시각
 
     @Column(nullable = false)
     private LocalDateTime updatedAt; //수정된 시작
+
+
 
     public Category getCategory() {
         return category;
@@ -78,6 +84,11 @@ public class BlogPost {
     @JoinColumn(name = "category_id",nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer" ,"handler"})//순환 참조 방지
     private Category category;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Comment> comments = new ArrayList<>();
+
 
     @PrePersist
     public void onCreate(){

@@ -57,7 +57,7 @@ const BlogAll : React.FC = () => {
                     <Col key={blog.id} md={4} className="mb-4">
                         <Card className="custom-card" onClick={() => navigate(`/blog/${blog.id}`)} style={{cursor:"pointer"}}>
                             <Card.Header>
-                                {blog.category.name}
+                                {blog.category?.name || "카테고리 없음"}
                             </Card.Header>
                             <Card.Body>
                                 <Card.Title>{blog.title.length > 20 ? blog.title.substring(0, 20) + "..." : blog.title}

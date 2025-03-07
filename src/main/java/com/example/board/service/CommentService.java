@@ -47,7 +47,7 @@ public class CommentService {
     }
 
     public List<Comment> getCommentByPost(Long postId) {
-        return commentRepository.findByPostId(postId);
+        return commentRepository.findByPostIdWithUser(postId);
     }
 
     @Transactional
