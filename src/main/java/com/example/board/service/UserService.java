@@ -1,15 +1,19 @@
 package com.example.board.service;
 
 import com.example.board.dto.UserDto;
+import com.example.board.dto.UserUpdateRequest;
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDateTime;
 
 @Service
 public class  UserService {
@@ -48,5 +52,34 @@ public class  UserService {
           userRepository.save(user);
 
           return "회원가입 성공";
+    }
+
+    @Transactional
+    public User updateUser(String email, UserUpdateRequest request){
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다"));
+
+        // 변경할 필드만 업데이트
+        if(request.getFirstName() != null) user.setFirstName(request.getFirstName());
+        if(request.getLastName() != null) user.setLastName(request.getLastName());
+        if(request.getPhoneNumber() != null) user.setPhoneNumber(request.getPhoneNumber());
+        if(request.getContent() != null) user.setContent(request.getContent());
+
+        return userRepository.save(user);
+    }
+
+    @Transactional
+    public void softDeleteUser(String email) {
+        User user = userRepository.findByEmailIncludingDeleted(email)
+                .orElseThrow(() -> new RuntimeException("유저를 찾을 수 없습니다."));
+
+        if(user.getDeletedAt() != null){
+            throw new RuntimeException("이미 탈퇴한 유저입니다.");
+        }
+
+
+        //논리 삭제 처리(deleted_at 업데이트)
+        user.setDeletedAt(LocalDateTime.now());
+        userRepository.save(user);
     }
 }

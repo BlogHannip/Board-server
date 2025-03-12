@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {checkLogin, login} from "../store/authSlice.tsx";
+import {checkLogin} from "../store/authSlice.tsx";
 import apiClient from '../apiClient.tsx';
 import {
     MDBBtn,
@@ -15,12 +15,13 @@ import {
 } from 'mdb-react-ui-kit';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import {useDispatch} from "react-redux";
+import {AppDispatch} from "../store/store.tsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const dispatch = useDispatch(); //dispatch 훅으로 클라이언트 상태관리
+    const dispatch = useDispatch<AppDispatch>(); //dispatch 훅으로 클라이언트 상태관리
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -34,10 +35,13 @@ const LoginForm = () => {
         try {
             const requestData = {email ,password};
             const response = await apiClient.post('/login', requestData);
-            console.log('로그인 성공:', response.data);
+            console.log('로그인 응답:', response.data);
+            console.log("삭제 여부:" , response.data.deletedAt);
 
-            const jwtToken = response.data.token;
-            console.log('토큰 :' , jwtToken );
+            if(response.data.deletedAt != null) {
+                alert("이미 탈퇴한 계정입니다.")
+                return;
+            }
 
             const userEmail = response.data.email;
 
@@ -49,6 +53,10 @@ const LoginForm = () => {
             alert("로그인이 성공했습니다!");
             navigate('/main');
         } catch (err: any) {
+            if (err.response?.status == 400) {
+                alert('이미 탈퇴한 계정입니다.');
+                return;
+            }
             const message = err.response?.data?.message || '로그인 중 오류가 발생했습니다.';
             setError(message);
         }
@@ -94,7 +102,7 @@ const LoginForm = () => {
                                     className="mb-4"
                                     label="아이디 기억하기"
                                 />
-                                <button size="lg" type="submit" className="btn btn-primary"
+                                <button type="submit" className="btn btn-primary"
                                 style={{width:'400px',}}>
                                     Login
                                 </button>

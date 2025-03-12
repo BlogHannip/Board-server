@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import apiClient from "../apiClient.tsx";
 
 interface LoginResponse {
@@ -47,11 +47,11 @@ export const logout = createAsyncThunk<void, void, { rejectValue: any }>(
     }
 );
 
-const authSlice = createSlice<AuthState, any>({
+const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {  //reducer: 해당 상태를 변경하는 함수
-        login:(state,action) =>{
+        login:(state,action:PayloadAction<{email:string, exp:number}>) =>{
             state.isAuthenticated =true;
             state.email =action.payload.email;
             state.exp = action.payload.exp;
@@ -59,17 +59,17 @@ const authSlice = createSlice<AuthState, any>({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(checkLogin.fulfilled, (state, action) => {
+            .addCase(checkLogin.fulfilled, (state:AuthState , action: PayloadAction<LoginResponse>) => {
                 state.isAuthenticated = true; //로그인 성공시 인증된 사용자
                 state.email = action.payload.email; //상태로 갱신할 이메일 = 로그인에 사용된 이메일
                 state.exp = action.payload.exp;
             })
-            .addCase(checkLogin.rejected, (state) => {
+            .addCase(checkLogin.rejected, (state :AuthState) => {
                 state.isAuthenticated = false; //로그인 거부 된 사용자 = 로그인 안한상태
                 state.email = null; //상태 email = 없음
                 state.exp = null;
             })
-            .addCase(logout.fulfilled, (state) => {
+            .addCase(logout.fulfilled, (state:AuthState) => {
                 state.isAuthenticated = false;
                 state.email = null;
                 state.exp   = null;

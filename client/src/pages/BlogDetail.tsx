@@ -112,9 +112,9 @@ const BlogDetail :React.FC = () =>{
 
     const handleUpdateComment = (commentId:number) =>{
         apiClient.put(`/comments/update/${commentId}`,{content:updateContent})
-            .then((response) =>{
+            .then((_response) =>{
                 setComments(comments.map(comment =>(
-                    comment.id === commentId ? {...comment, content: updateContent} :comment
+                    comment.id === commentId ? {...comment, content: updateContent} : comment
                 )))
                 setEditingCommentId(null);
             })
@@ -128,7 +128,7 @@ const BlogDetail :React.FC = () =>{
             .then(() => {
                 setComments(comments.filter(comment => comment.id !== commentId));
             })
-            .catch((error) => console.log("댓글 삭제 실패"));
+            .catch((error:any) => console.log("댓글 삭제 실패" + error));
     };
 
     return (
@@ -203,7 +203,7 @@ const BlogDetail :React.FC = () =>{
                 <div className="comment-input mt-4">
                     <Form.Control
                         as="textarea"
-                        row={3}
+                        rows={3}
                         value={newComment}
                         onChange={(e) => setNewCommnent(e.target.value)}
                         placeholder="댓글 입력하세요.">

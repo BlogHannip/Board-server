@@ -44,7 +44,7 @@ public class AuthenticationController {
             if (!jwtTokenService.isTokenExpired(accessToken)) {
                 String email = jwtTokenService.getEmailFromToken(accessToken);
                 long exp = jwtTokenService.getExpirationTimeFromToken(accessToken);
-                return ResponseEntity.ok(new LoginResponseDto(accessToken, refreshToken, "로그인유지됨",email,exp));
+                return ResponseEntity.ok(new LoginResponseDto(accessToken, refreshToken, "로그인유지됨",email,exp ,null));
             }
         }
 
@@ -56,10 +56,10 @@ public class AuthenticationController {
 
                 return ResponseEntity.ok()
                         .header("Set-Cookie", "accessToken:" + newAccessToken + "; HttpOnly: Path=/; Max-Age=1800")
-                        .body(new LoginResponseDto(accessToken,refreshToken,"토큰재발급",email,exp));
+                        .body(new LoginResponseDto(accessToken,refreshToken,"토큰재발급",email,exp,null));
             }
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null ,0));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인필요",null ,0,null));
     }
 
     @GetMapping("/me")
@@ -69,10 +69,10 @@ public class AuthenticationController {
         if(accessToken != null && !jwtTokenService.isTokenExpired(accessToken)){
             String email = jwtTokenService.getEmailFromToken(accessToken);
             long exp = jwtTokenService.getExpirationTimeFromToken(accessToken);
-            return  ResponseEntity.ok(new LoginResponseDto(accessToken,null,"로그인 유지", email,exp));
+            return  ResponseEntity.ok(new LoginResponseDto(accessToken,null,"로그인 유지", email,exp ,null));
         }
 
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인 필요",null,0));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponseDto(null,null,"로그인 필요",null,0 ,null));
     }
 
     private String getCookieValue(HttpServletRequest request, String cookieName){

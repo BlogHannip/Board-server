@@ -26,8 +26,12 @@ public class BlogService {
     @Transactional
     public BlogPost savePost(String title, String content , String email , String  categoryName) {
         //이메일로 사용자 조회
-        User user = userRepository.findByEmail(email).
+        User user = userRepository.findByEmailIncludingDeleted(email).
                 orElseThrow(() -> new RuntimeException("사용자를 찾을수 없습니다"));
+
+        if(user.getDeletedAt() != null) {
+            throw new RuntimeException("탈퇴한 유저이다.");
+        }
 
         Category category = categoryRepository.findByName(categoryName)
                 .orElseThrow(() -> new RuntimeException("카테고리가 없습니다."));

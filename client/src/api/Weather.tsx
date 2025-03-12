@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap 스타일 적용
 
+interface GitHubProfile {
+    avatar_url : string;
+    name: string;
+    login: string;
+    bio: string;
+    html_url: string;
+}
+
 const Weather: React.FC = () => {
     const [weather, setWeather] = useState({
         temp: 0,
@@ -12,8 +20,7 @@ const Weather: React.FC = () => {
         icon: "",
         city: "Seoul",
     });
-    const [githubData, setGithubData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [githubData, setGithubData] = useState< GitHubProfile | null>(null);
 
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const cityName = "Seoul";
@@ -41,7 +48,6 @@ const Weather: React.FC = () => {
                     icon: data.weather[0].icon,
                     city: data.name,
                 });
-                setLoading(false);
             } catch (error) {
                 console.error("날씨 정보를 가져오는 중 오류 발생", error);
             }

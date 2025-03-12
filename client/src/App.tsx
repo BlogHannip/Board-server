@@ -1,4 +1,4 @@
-import {matchPath, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {matchPath, Route, Routes, useLocation} from "react-router-dom";
 import './style/App.css';
 import Footer from "./components/Footer.tsx";
 import Header from "./components/Header.tsx";
@@ -9,7 +9,7 @@ import MyPage from "./pages/MyPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-summernote/dist/react-summernote.css";
 import QuillEditor from "./api/QuillEditor.tsx";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import { checkLogin } from "./store/authSlice.tsx";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store/store.tsx";
@@ -20,11 +20,10 @@ import ShowWorking from "./components/ShowWorking.tsx";
 import Categoty from "./components/Categoty.tsx";
 import SearchBar from "./components/SearchBar.tsx";
 import SearchResults from "./components/SearchResults.tsx";
-import CategoryBLogs from "./components/CategoryBLogs.tsx";
+
 
 function App() {
     const location = useLocation();
-    const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {

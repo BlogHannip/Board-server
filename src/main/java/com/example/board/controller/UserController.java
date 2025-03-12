@@ -1,13 +1,15 @@
 package com.example.board.controller;
 
 import com.example.board.dto.UserDto;
+import com.example.board.dto.UserUpdateRequest;
+import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
 import com.example.board.service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,5 +39,45 @@ public class UserController {
         } else {
             return ResponseEntity.status(400).body(result);
         }
+    }
+
+    @PatchMapping("/user/{email}")
+    public ResponseEntity<User> updateUser(
+            @PathVariable String email,
+            @RequestBody UserUpdateRequest request
+            ) {
+        System.out.println(email);
+        User updatedUser = userService.updateUser(email,request);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+
+    @DeleteMapping("/user/{email}")
+    public ResponseEntity<?> deleteUser(@PathVariable String email , HttpServletResponse response){
+        userService.softDeleteUser(email);
+
+        // HttpOnly 쿠키 삭제
+        ResponseCookie accessCookie = ResponseCookie.from("accessToken" ,"")
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(0) // 만료
+                .sameSite("Lax")
+                .build();
+
+        ResponseCookie refreshCookie = ResponseCookie.from("refreshToken" , "")
+                .httpOnly(true)
+                .secure(false)
+                .path("/")
+                .maxAge(0) //리프레시도 만료
+                .sameSite("Lax")
+                .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, accessCookie.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE , refreshCookie.toString());
+
+        //프런트에서 삭제할수 있도록 Set-Cookie 응답 설정
+
+        return ResponseEntity.ok("회원가입 탈퇴성공");
     }
 }

@@ -12,7 +12,7 @@ import {
 }
     from 'mdb-react-ui-kit';
 
-function MDBSelect(props: { // 메소드가 안떠서 직접만듬
+function MDBSelect(_props: { // 메소드가 안떠서 직접만듬
     size: string,
     data: ({ disabled: boolean; text: string; value: number } | { text: string; value: number } | {
         text: string;
@@ -126,13 +126,13 @@ const RegisterForm = () => {
                         <MDBRow>
 
                             <MDBCol md ='6'>
-                                <MDBInput wrapperClass="mb-4" label='비밀번호' size='lg' id='form4' type='email'
+                                <MDBInput wrapperClass="mb-4" label='비밀번호' size='lg' id='form4' type='password'
                                 value={password}
                                 onChange={(e)=>setPassword(e.target.value)}/>
                             </MDBCol>
 
                             <MDBCol md ='6'>
-                                <MDBInput wrapperClass="mb-4" label='비밀번호 확인' size='lg' id='form4' type='email'
+                                <MDBInput wrapperClass="mb-4" label='비밀번호 확인' size='lg' id='form4' type='password'
                                 value={confirmPassword}
                                 onChange={(e)=>setConfirmPassword(e.target.value)}/>
                             </MDBCol>

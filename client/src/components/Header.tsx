@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store/store.tsx";
 import { useEffect, useState } from "react";
-import { checkLogin, logout } from "../store/authSlice.tsx";
+import { logout } from "../store/authSlice.tsx";
 import ProfileDropdown from "./ProfileDown.tsx"; // 추가된 컴포넌트
 
 export default function Header() {

@@ -33,6 +33,11 @@ public class LoginController {
         System.out.println("요청 데이터: " + loginRequestDto);
 
         LoginResponseDto response = loginService.login(loginRequestDto);
+        System.out.println("삭제 검증:" +response.getDeletedAt());
+
+        if(response.getDeletedAt() != null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
 
         String accessToken = jwtTokenService.createAccessToken(loginRequestDto.getEmail());
         String refreshToken = jwtTokenService.createRefreshToken(loginRequestDto.getEmail());

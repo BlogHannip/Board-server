@@ -1,5 +1,7 @@
 package com.example.board.dto;
 
+import java.time.LocalDateTime;
+
 public class LoginResponseDto {
     public String getAccessToken() {
         return accessToken;
@@ -23,6 +25,16 @@ public class LoginResponseDto {
 
     private String message;
 
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+    private LocalDateTime deletedAt;
+
     public long getExp() {
         return exp;
     }
@@ -39,12 +51,13 @@ public class LoginResponseDto {
 
     private String email;
 
-    public LoginResponseDto(String accessToken,String refreshToken, String message,String email,long exp){
+    public LoginResponseDto(String accessToken, String refreshToken, String message, String email, long exp , LocalDateTime deletedAt){
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.message = message;
         this.email = email;
         this.exp = exp;
+        this.deletedAt = deletedAt;
     }
 
 
