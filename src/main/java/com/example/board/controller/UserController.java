@@ -80,4 +80,10 @@ public class UserController {
 
         return ResponseEntity.ok("회원가입 탈퇴성공");
     }
+
+    @PutMapping("/user/restore/{email}")
+    public ResponseEntity<String> restoreUser(@PathVariable String email){
+        userService.restoreUser(email);
+        return ResponseEntity.ok("회원복구 성공");
+    }
 }

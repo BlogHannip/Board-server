@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class  UserService {
@@ -76,10 +77,29 @@ public class  UserService {
         if(user.getDeletedAt() != null){
             throw new RuntimeException("이미 탈퇴한 유저입니다.");
         }
-
-
         //논리 삭제 처리(deleted_at 업데이트)
         user.setDeletedAt(LocalDateTime.now());
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void restoreUser(String email) {
+        Optional<User> optionalUser = userRepository.findByEmailIncludingDeleted(email);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            if(user.getDeletedAt() == null) {
+                throw new RuntimeException("삭제되지 않은 게정입니다.");
+            }
+
+            user.setDeletedAt(null);
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("잘못된 접근입니다.");
+        }
+
+
+
     }
 }
