@@ -20,6 +20,7 @@ import ShowWorking from "./components/ShowWorking.tsx";
 import Categoty from "./components/Categoty.tsx";
 import SearchBar from "./components/SearchBar.tsx";
 import SearchResults from "./components/SearchResults.tsx";
+import Restore from "./pages/Restore.tsx";
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
     }, []);
 
     // 특정 경로에서는 전체 화면을 차지하도록 설정
-    const isFullPage = ["/login", "/register", "/user", "/edit" ,"/myBlog","/search"].includes(location.pathname)
+    const isFullPage = ["/login", "/register", "/user", "/edit" ,"/myBlog","/search" ,"/restore"].includes(location.pathname)
         || matchPath("/blog/:blogId", location.pathname) !== null
         || matchPath("/edit/:blogId", location.pathname) !==null;
 
@@ -49,6 +50,7 @@ function App() {
                     <Route path="/blog/:blogId" element={<BlogDetail/>}/>
                     <Route path="/edit/:blogId" element={<EditBlog/>}/>
                     <Route path="/search" element={<SearchResults/>}/>
+                    <Route path="/restore" element={<Restore/>}/>
                 </Routes>
             </div>
             {!isFullPage && (

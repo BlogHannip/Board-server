@@ -64,8 +64,8 @@ const ProfileDropdown: React.FC = () => {
                     alt="GitHub Avatar"
                     style={{ width: "80px" }}
                 />
-                <p className="mb-1 text-white">{githubData?.name}</p>
-                <p className="text-muted">@{githubData?.login}</p>
+                <p className="mb-1" >{githubData?.name}</p>
+                <p className="text-white">@{githubData?.login}</p>
                 <a
                     href={githubData?.html_url}
                     className="btn btn-primary btn-sm w-100"
@@ -84,7 +84,7 @@ const ProfileDropdown: React.FC = () => {
                     alt="Jeongraewon Avatar"
                     style={{ width: "80px" }}
                 />
-                <p className="text-muted">@jeongraewon</p>
+                <p className="text-white">@jeongraewon</p>
                 <a
                     href="https://github.com/jeongraewon"
                     className="btn btn-primary btn-sm w-100"

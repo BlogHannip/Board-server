@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {checkLogin} from "../store/authSlice.tsx";
 import apiClient from '../apiClient.tsx';
 import {
@@ -66,6 +66,7 @@ const LoginForm = () => {
         navigate('/register');
     };
 
+
     return (
         <MDBContainer className="">
             <MDBRow className="d-flex justify-content-center align-items-center h-100">
@@ -96,13 +97,18 @@ const LoginForm = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <MDBCheckbox
-                                    name="flexCheck"
-                                    id="flexCheckDefault"
-                                    className="mb-4"
-                                    label="아이디 기억하기"
-                                />
-                                <button type="submit" className="btn btn-primary"
+                                <span className="d-flex">
+                                     <MDBCheckbox
+                                         name="flexCheck"
+                                         id="flexCheckDefault"
+                                         className="mb-4"
+                                         label="아이디 저장"
+                                     />
+                                     <Link to="/restore" style={{marginLeft:"240px"}}>
+                                         계정 복구
+                                     </Link>
+                                </span>
+                                <button type="submit" className="mt-0 btn btn-primary"
                                 style={{width:'400px',}}>
                                     Login
                                 </button>
