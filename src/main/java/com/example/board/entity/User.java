@@ -19,22 +19,22 @@ public class User {
     @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
 
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true) //3.13 카카오 로그인 사용자는 비밀번호 nullable = true로 해야됨.
     private String password;
 
-    @Column(nullable = false)
+    @Column
     private String sex;
 
-    @Column(nullable = false)
+    @Column
     private int birthday;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String phoneNumber;
 
     public String getContent() {
@@ -50,6 +50,28 @@ public class User {
 
     @Column(nullable = false)
     private String role = "ROLE_USER"; // 기본값 유저 권한
+
+    public Long getKakaoId() {
+        return kakaoId;
+    }
+
+    public void setKakaoId(Long kakaoId) {
+        this.kakaoId = kakaoId;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    @Column(nullable = true, unique = true)
+    private Long kakaoId; //카카오에서 제공하는 유저의 고유 ID
+
+    @Column(nullable = true)
+    private String profileImage; //카카오 프로필 이미지 URL;
 
     public LocalDateTime getDeletedAt() {
         return deletedAt;
@@ -128,6 +150,10 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isKakaoUser() {
+        return this.kakaoId != null;
     }
 }
 

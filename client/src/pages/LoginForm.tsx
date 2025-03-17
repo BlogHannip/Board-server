@@ -3,19 +3,22 @@ import {Link, useNavigate} from 'react-router-dom';
 import {checkLogin} from "../store/authSlice.tsx";
 import apiClient from '../apiClient.tsx';
 import {
-    MDBBtn,
     MDBContainer,
     MDBRow,
     MDBCol,
     MDBCard,
     MDBCardBody,
     MDBInput,
-    MDBIcon,
     MDBCheckbox,
 } from 'mdb-react-ui-kit';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import {useDispatch} from "react-redux";
 import {AppDispatch} from "../store/store.tsx";
+
+const KAKAO_CLIENT_ID = "6a641f762b414c6a158a851863141608";  // 여기에 실제 REST API 키 입력
+const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth/kakao/callback"; // 카카오 개발자센터에서 등록한 리다이렉트 URI
+
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -24,6 +27,9 @@ const LoginForm = () => {
     const dispatch = useDispatch<AppDispatch>(); //dispatch 훅으로 클라이언트 상태관리
     const navigate = useNavigate();
 
+    const handleKaKaoLogin = () =>{
+        window.location.href = KAKAO_AUTH_URL;
+    }
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         if(!email || !password){
@@ -124,15 +130,7 @@ const LoginForm = () => {
 
                             <hr className="my-4" />
 
-                            <MDBBtn className="mb-2 w-100" size="lg" style={{ backgroundColor: '#dd4b39' }}>
-                                <MDBIcon fab icon="google" className="mx-2" />
-                                Sign in with Google
-                            </MDBBtn>
-
-                            <MDBBtn className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }}>
-                                <MDBIcon fab icon="facebook-f" className="mx-2" />
-                                Sign in with Facebook
-                            </MDBBtn>
+                            <img src="/images/kakao.png"  alt="카카오 로그인" style={{cursor:"pointer" , width:"250px"}} onClick={handleKaKaoLogin}/>
                         </MDBCardBody>
                     </MDBCard>
                 </MDBCol>

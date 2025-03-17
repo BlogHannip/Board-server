@@ -39,6 +39,7 @@ public class SecurityConfig{
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세선 사용 x ,토큰 기반
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/oauth/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH , "/api/user/**").permitAll()
                         .requestMatchers("/api/blog/**","/api/register","/api/login","/api/check-login","/api/logout","/api/user/{email}","/api/posts" ,"api/blogs/**","/api/**","/comments/**").permitAll()
                         //위와같은 주소창에서 접근을 허용한다. 만일안할경우 요청자체가 거부.
