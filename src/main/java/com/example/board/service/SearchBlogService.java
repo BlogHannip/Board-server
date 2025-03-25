@@ -20,7 +20,7 @@ public class SearchBlogService {
         this.blogRepository =blogRepository;
     }
 
-    @Transactional(readOnly = true) //1차 캐시 활성화 되서 여러번 조회해도 DB 조회 X
+    @Transactional(readOnly = true) //1차 캐시 활성화 되서 여러번 조회해도 DB 조회 X //프록시 생성.
     public Page<BlogPost> getBlogsByUser(String email ,Pageable pageable) {
         return blogRepository.findByUser_Email(email ,pageable);
     }

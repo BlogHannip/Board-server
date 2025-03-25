@@ -31,7 +31,7 @@ public class AuthenticationController {
             System.out.println("쿠키없다 다시해!");
         } else {
             for(Cookie cookie : cookies){
-                System.out.println("쿠키확인:"+cookie.getName()+ ": " + cookie.getValue());
+                System.out.print(1); //쿠키 확인부분 추후 수정할거면 하셈
             }
         }
 

@@ -67,15 +67,37 @@ public class KaKaoAuthService {
             ResponseEntity<Map> response = restTemplate.exchange(userInfoUrl, HttpMethod.GET, request,Map.class);
             Map<String, Object> responseBody = response.getBody();
 
+            System.out.println("카카오 API 응답:" + response.getBody());
+
            // 카카오 사용자 정보 파싱
             Long kakaoId = Long.valueOf(responseBody.get("id").toString()); //카카오 고유 id
 
             Map<String ,Object> kakaoAccount = (Map<String , Object>) responseBody.get("kakao_account");
-            String email = (kakaoAccount != null && kakaoAccount.get("email") != null) ? kakaoAccount.get("email").toString() : "no-email";
+            String email = "no-email"; //기본값 설정
 
-            Map<String ,Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
-            String nickname =(profile != null && profile.get("nickname") != null) ? profile.get("nickname").toString() : "카카오 사용자";
-            String profileImage = (profile != null && profile.get("profile_image_url") != null) ? profile.get("profile").toString() : null ;
+            //후 null 값 검증 로직
+            if(kakaoAccount != null){
+                  if(kakaoAccount.get("email") != null){
+                        email = kakaoAccount.get("email").toString();
+                  }
+            }
+
+            System.out.println("가져온 이메일:" + email);
+
+
+            String nickname = "카카오 사용자";
+            String profileImage = null;
+
+            if (kakaoAccount != null && kakaoAccount.get("profile") != null) {
+                  Map<String ,Object> profile = (Map<String, Object>) kakaoAccount.get("profile");
+
+                  if(profile.get("nickname") != null) {
+                        nickname = profile.get("nickname").toString();
+                  }
+                  if(profile.get("profile_image_url") != null) {
+                        profileImage = profile.get("profile_image_url").toString();
+                  }
+            }
 
             KakaoUserInfoDto.KakaoProfile kakaoProfile = new KakaoUserInfoDto.KakaoProfile();
             kakaoProfile.setNickname(nickname);

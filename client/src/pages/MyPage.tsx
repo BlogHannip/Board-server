@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import apiClient from "../apiClient.tsx";
-import {useDispatch, useSelector} from "react-redux";
-import { RootState } from "../store/store.tsx";
+import { useSelector} from "react-redux";
+import {RootState, useAppDispatch} from "../store/store.tsx";
 import {useNavigate} from "react-router-dom";
 import {logout} from "../store/authSlice.tsx";
 
@@ -11,7 +11,7 @@ const MyPage: React.FC = () => {
     const email = useSelector((state: any) => state.auth?.email);
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [user, setUser] = useState<any>(null);
     const [error, setError] = useState('');

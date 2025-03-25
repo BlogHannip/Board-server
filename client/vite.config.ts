@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     host: '0.0.0.0', //외부접근허용
     port: 5173,
-    strictPort: true
+    strictPort: true,
+  },
+  define:{
+    global: {} ,
   }
 });

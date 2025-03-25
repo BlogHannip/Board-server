@@ -9,7 +9,7 @@ const Restore = () => {
         try{
             await ApiClient.put(`/user/restore/${email}`);
             alert("이메일 복구 요청이 완료되었습니다.");
-        } catch (err: string) {
+        } catch (err: any) {
             console.log("에러발생" + err);
         }
     }

@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/oauth/kakao")
 public class KaKaoAuthController {
@@ -30,7 +32,7 @@ public class KaKaoAuthController {
 
     // 카카오에서 인가 코드를 받은 후, 백엔드가 엑세스 토큰 요청
     @GetMapping("/callback")
-    public ResponseEntity<?> kakaoLogin(@RequestParam String code, HttpServletResponse response){
+    public void kakaoLogin(@RequestParam String code, HttpServletResponse response) throws IOException {
         System.out.println("카카오 인가 코드:" +code);
 
         //카카오에서 엑세스 토큰
@@ -50,6 +52,6 @@ public class KaKaoAuthController {
         jwtCookie.setMaxAge(7*24*60*60);
         response.addCookie(jwtCookie);
 
-        return ResponseEntity.ok("카카오 로그인 성공");
+        response.sendRedirect("http://localhost:5173/main");
     }
 }

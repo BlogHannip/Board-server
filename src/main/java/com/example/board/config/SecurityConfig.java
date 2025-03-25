@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,7 +42,7 @@ public class SecurityConfig{
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/oauth/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH , "/api/user/**").permitAll()
-                        .requestMatchers("/api/blog/**","/api/register","/api/login","/api/check-login","/api/logout","/api/user/{email}","/api/posts" ,"api/blogs/**","/api/**","/comments/**").permitAll()
+                        .requestMatchers("/ws/**","/sockjs-node/**","/api/blog/**","/api/register","/api/login","/api/check-login","/api/logout","/api/user/{email}","/api/posts" ,"api/blogs/**","/api/**","/comments/**").permitAll()
                         //위와같은 주소창에서 접근을 허용한다. 만일안할경우 요청자체가 거부.
                         .requestMatchers("/api/my-blogs").authenticated() //인증된 사용자만 거부.
                         .requestMatchers(HttpMethod.DELETE,"api/user/**").authenticated()
@@ -59,17 +60,19 @@ public class SecurityConfig{
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration =new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+
         configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT","OPTIONS","PATCH"));
+
+
         configuration.setAllowedHeaders(Arrays.asList("Authorization","Content-Type","Cookie"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.addExposedHeader("Set-Cookie");
+
+        configuration.setExposedHeaders(Arrays.asList("Authentication","Set-Cookie"));
 
 
         configuration.setAllowCredentials(true);
 
-        configuration.addAllowedHeader("*");
-        configuration.addExposedHeader("*");
 
+        //Cors 설정을 모든경로에 적용하라.
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
@@ -84,5 +87,6 @@ public class SecurityConfig{
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager(); //수정 ?
     }
+
 
 }

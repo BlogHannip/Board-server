@@ -21,6 +21,7 @@ import Categoty from "./components/Categoty.tsx";
 import SearchBar from "./components/SearchBar.tsx";
 import SearchResults from "./components/SearchResults.tsx";
 import Restore from "./pages/Restore.tsx";
+import ChatWidget from "./components/ChatWidget.tsx";
 
 
 function App() {
@@ -83,6 +84,8 @@ function App() {
                 <div>
                 </div>
             )}
+            <ChatWidget/>
+
             <Footer/>
         </div>
     );

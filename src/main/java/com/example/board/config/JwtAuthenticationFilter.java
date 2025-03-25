@@ -31,6 +31,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        System.out.println("요청 uri:" + request.getRequestURI());
+        if(uri.startsWith("/ws/") || uri.contains("sockjs")  || uri.contains("websocket") || uri.contains("xhr")) {
+            filterChain.doFilter(request,response);
+            return;
+        }
+
         String token = null;
 
         Cookie[] cookies = request.getCookies();
@@ -55,12 +62,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             //인증될경우 SecurityContextHolder에 email을 저장하라
 
-            System.out.println("Authenticated user: " + email);
-            System.out.println("SecurityContext 인증 객체 :" +SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         }
 
         filterChain.doFilter(request,response);
 
-        System.out.println("SecurityContext 인증객체 (필터 종료 후):"+SecurityContextHolder.getContext().getAuthentication());
    }
 }
