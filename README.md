@@ -1,36 +1,57 @@
-# Board-server
+## 📘 프로젝트 소개
 
-## 2025-01-15
-### 수정사항
-- username -> name 
-- apllication.properties (개인 로컬정보) 깃이그노어에 추가해서 보호
+**Analog**는 개인 블로그 플랫폼으로, 게시글 작성, 댓글, 실시간 채팅 및 키워드 검색 기능을 제공합니다.  
+프론트엔드는 React, 백엔드는 Spring Boot 기반의 Monolithic 구조로 개발되었습니다.
 
-## 2025-01-16
-@table(name) 설정으로 postsql에서 충돌 수정
 
-## 2025-01-17
-- 리엑트 로그인 회원가입 폼 부분 틀 완성
-- 추가 (birthday, firstname, lastName) 추가 
-- 그에따라 회원가입 서비스 ,dto 수정
+## 기술스택
+- frontend: React, Vite , TypeSciprt
+- Backend: Spring Boot, Java 20, Spring Mvc
+- DB: PostgreSql
+- Build: Maven
+- Deployment: Docker-Compose이
+![test1.png](test1.png)
 
-## 2025-01-20 
-- Jwt 토큰 인증관련 로직 구현중
-- 클라이언트 요청 정상처리 에러 수정
-- 로그인서비스 일부 수정
-## 2025-02-03
-- jwt 토큰을 http-Only 쿠키 방식으로 변경
-  (보안상의 이유)
-- 로그아웃로직을 구현해서 토큰(쿠키) 만료 패턴 설정
-- 리엑트 일부분 수정(로그인,로그아웃)
-## 2025-02-10
-- 리엑트 리듀서 관련 로직 수정/추가 
-- Authenticater 를 통해 사용자 로그인 상태 유지 로직 설게 
-## 2025-02-11
-- 리엑트 menu , header 부분합침( 가시성,기능추가)
-- 전체적인 리팩토링
+## 실행방법
 
-## 2025-02-12
-- 블로그 데이터 사용자 인증 권한에 따라 데이터베이스 저장 
-로직 수행
-- 블로그 미리보기 기능(사용자 로그인에따라 ) 로직 구현
-- 차후 미리보기 디자인 커스텀 예정
+### 프런트엔드 실행
+```
+ cd client 
+ yarn install 
+ yarn dev
+```
+
+### 백엔드 실행
+```
+./mvnw clean install
+./mvnw spring-boot:run
+```
+### ✨ 주요 기능
+✅ 블로그 게시글 CRUD
+
+게시글 작성, 수정, 삭제, 조회
+
+💬 댓글 기능 (CRUD 포함)
+
+게시글에 대한 댓글 등록 및 관리
+
+💬 실시간 채팅 기능
+
+WebSocket을 이용한 사용자 간 채팅
+
+🔍 검색 기능
+
+제목 또는 콘텐츠에 포함된 키워드 기반 블로그 검색
+
+
+## 향후 계획 (선택 사항)
+   markdown
+### 🔮 향후 개발 예정
+
+- 사용자 프로필 및 마이페이지 기능
+- 다크모드 지원
+- 알림 기능 추가
+
+### 개발 담당
+- 깃허브:
+

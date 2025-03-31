@@ -16,9 +16,9 @@ import {useDispatch} from "react-redux";
 import {AppDispatch} from "../store/store.tsx";
 
 const KAKAO_CLIENT_ID = "6a641f762b414c6a158a851863141608";  // 여기에 실제 REST API 키 입력
-const KAKAO_REDIRECT_URI = "http://localhost:8080/oauth/kakao/callback"; // 카카오 개발자센터에서 등록한 리다이렉트 URI
+const KAKAO_REDIRECT_URI = "http://localhost:8081/oauth/kakao/callback"; // 카카오 개발자센터에서 등록한 리다이렉트 URI
 
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&prompt=login`;
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
