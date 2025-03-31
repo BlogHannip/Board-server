@@ -1,5 +1,7 @@
 package com.example.board.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "로그아웃" , description = "사용자 로그아웃")
 public class LogoutController {
 
     @PostMapping("/logout")
+    @Operation(summary = "로그아웃 창", description = "사용자 토큰을 제거하고 로그아웃을실행한다.")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response){
 
         new SecurityContextLogoutHandler().logout(request,response,SecurityContextHolder.getContext().getAuthentication());

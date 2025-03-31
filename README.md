@@ -52,6 +52,10 @@ WebSocket을 이용한 사용자 간 채팅
 - 다크모드 지원
 - 알림 기능 추가
 
+### api 명세서(swagger UI)
+http://localhost:8080/swagger-ui/index.html#/
+
 ### 개발 담당
-- 깃허브:
+- 깃허브:https://github.com/BlogHannip/Board-server.git
+
 

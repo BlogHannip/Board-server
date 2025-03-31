@@ -5,6 +5,8 @@ import com.example.board.dto.UserUpdateRequest;
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
 import com.example.board.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:5173")
 @RestController
+@Tag(name = "User API" , description = "사용자 관련 API")
 public class UserController {
     private final UserService userService;
 
@@ -26,7 +29,7 @@ public class UserController {
         this.userService = userService;
     }
 
-
+    @Operation(summary = "회원가입", description = "새로운 사용자 등록.")
     @PostMapping("/register") //@RequestBody 자바 객체로 conversion (HttpMessageConverter)
     public ResponseEntity<?> register(@Valid @RequestBody UserDto userDto ,BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -41,6 +44,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "회원 정보 수정", description = "사용자의 정보를 이메일 기준으로 생성.")
     @PatchMapping("/user/{email}")
     public ResponseEntity<User> updateUser(
             @PathVariable String email,
@@ -51,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-
+    @Operation(summary = "회원 탈퇴", description = "사용자를 논리삭제 처리하고 쿠키제거")
     @DeleteMapping("/user/{email}")
     public ResponseEntity<?> deleteUser(@PathVariable String email , HttpServletResponse response){
         userService.softDeleteUser(email);
@@ -81,6 +85,7 @@ public class UserController {
         return ResponseEntity.ok("회원가입 탈퇴성공");
     }
 
+    @Operation(summary = "유저 복구" , description = "논리삭제한 유저를 복구한다. (null)")
     @PutMapping("/user/restore/{email}")
     public ResponseEntity<String> restoreUser(@PathVariable String email){
         userService.restoreUser(email);

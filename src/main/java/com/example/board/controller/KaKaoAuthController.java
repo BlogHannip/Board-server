@@ -2,6 +2,8 @@ package com.example.board.controller;
 
 import com.example.board.dto.KakaoUserInfoDto;
 import com.example.board.service.KaKaoAuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/oauth/kakao")
+@Tag(name = "카카오 로그인" , description = "카카오 로그인을 하기위한 과정")
 public class KaKaoAuthController {
 
     private final KaKaoAuthService kaKaoAuthService;
@@ -21,6 +24,7 @@ public class KaKaoAuthController {
 
     //프론트에서 카카오 로그인 버튼 클릭시 , 카카오 로그인 페이지 로 다이렉트
     @GetMapping("/login")
+    @Operation(summary = "카카오 로그인" , description = "카카오 창으로 리다이렉트한우 로그인")
     public ResponseEntity<?> redirectToKakaoLogin() {
         String kakaoAuthUrl = "https://kauth.kakao.com/oauth/authorize" +
                 "?client_id=6a641f762b414c6a158a851863141608" +

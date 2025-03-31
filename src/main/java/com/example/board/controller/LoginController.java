@@ -4,6 +4,8 @@ import com.example.board.dto.LoginRequestDto;
 import com.example.board.dto.LoginResponseDto;
 import com.example.board.service.JwtTokenService;
 import com.example.board.service.LoginService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:5173")
+@Tag(name = "로그인" , description = "로그인후 jwt 토큰 발급")
 public class LoginController {
 
     private final LoginService loginService;
@@ -28,6 +31,7 @@ public class LoginController {
 
     // 로그인 요청 처리
     @PostMapping("/login")
+    @Operation(summary = "로그인 창", description = "로그인 후 access/refresh 토큰 발급")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto) {
         System.out.println("Post /api/login 호출");
         System.out.println("요청 데이터: " + loginRequestDto);
